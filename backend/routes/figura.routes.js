@@ -3,7 +3,7 @@ const express = require('express')
 const router = express.Router()
 
 const path = require('path')
-controller = require('../controllers/figura.controller')
+const controller = require('../controllers/figura.controller')
 
 const RETADDA = '/figura/reta/dda';
 const RETAPONTOMEDIO = '/figura/reta/ponto-medio';
@@ -24,27 +24,32 @@ router.get(RETADDA, (req, res, next) => {
 
 //req should be -> [{"ponto1X": "x1", "ponto1Y": "y1"}, {"ponto2X": "x2", "ponto2Y": "y2"}]
 router.get(RETAPONTOMEDIO, (req, res, next) => {
-	res.send(controller.getRetaPontoMedio(req, res))
+  const [{ponto1X, ponto1Y}, {ponto2X, ponto2Y}] = JSON.parse(req)
+	res.send(controller.getRetaPontoMedio(ponto1X, ponto1Y, ponto2X, ponto2Y))
 })
 
-//req should be -> [{"raio": "r"}]
+//req should be -> [{"raio": "r", "xOrigem": "xOrigem", "yOrigem":"yOrigem"}]
 router.get(CIRCULOEXPLICITA, (req, res, next) => {
-	res.send(controller.getCirculoEquacaoExplicita(req, res))
+  const [{raio, xOrigem, yOrigem}] = JSON.parse(req)
+	res.send(controller.getCirculoEquacaoExplicita(raio, xOrigem, yOrigem))
 })
 
-//req should be -> [{"raio": "r"}]
+//req should be -> [{"raio": "r", "xOrigem": "xOrigem", "yOrigem":"yOrigem"}]
 router.get(CIRCULOTRIGONOMETRIA, (req, res, next) => {
-	res.send(controller.getCirculoPontoMedio())
+  const [{raio, xOrigem, yOrigem}] = JSON.parse(req)
+	res.send(controller.getCirculoPontoMedio(raio, xOrigem, yOrigem))
 })
 
-//req should be -> [{"raio": "r"}]
+//req should be -> [{"raio": "r", "xOrigem": "xOrigem", "yOrigem":"yOrigem"}]
 router.get(CIRCULOPONTOMEDIO, (req, res, next) => {
-	res.send(controller.getCirculoMetodoTrigonometria(req))
+  const [{raraio, xOrigem, yOrigemio}] = JSON.parse(req)
+	res.send(controller.getCirculoMetodoTrigonometria(raio, xOrigem, yOrigem))
 })
 
 //req should be -> [{"ElipseCenter": "centerPos", "MinorRadius": "minorRadioSize"}]
 router.get(ELIPSEPONTOMEDIO, (req, res, next) => {
-	res.send(controller.getElipsePontoMedio(req))
+  const [{ElipseCenter, MinorRadius}] = JSON.parse(req)
+	res.send(controller.getElipsePontoMedio(ElipseCenter, MinorRadius))
 })
 
 module.exports = router

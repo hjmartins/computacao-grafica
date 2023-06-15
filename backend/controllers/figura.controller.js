@@ -1,6 +1,6 @@
 class FiguraController {
   
-  async getRetaDDA(x1,y1,x2,y2){    
+  getRetaDDA(x1,y1,x2,y2){    
     let pontos = []
 
     //descobre tamanho da reta
@@ -18,21 +18,21 @@ class FiguraController {
     //define os pontos iniciais e os coloca no ArrayList "pontosReta"
     let x = x1
     let y = y1
-
-    pontos.push({pontoX:round(x), pontoY:round(y)})
+    
+    pontos.push({pontoX: Math.round(x), pontoY: Math.round(y)})
 
     //enquanto x for menor que y o algoritmo incrementa a posicao do ponto e o coloca no Arraylist "pontosReta"
     while(x < x2){
       x+=xInc
       y+=yInc
 
-      pontos.push({pontox:round(x), pontoy:round(y)})      
+      pontos.push({pontox: Math.round(x), pontoy: Math.round(y)})      
     }
 
     return pontos
   }
 
-  async getRetaPontoMedio(x1,y1,x2,y2){
+  getRetaPontoMedio(x1,y1,x2,y2){
     let pontos = []
 
     let auxX1 = x1
@@ -110,7 +110,7 @@ class FiguraController {
   }
 
   //colocar parametros
-  async getCirculoEquacaoExplicita(){
+  getCirculoEquacaoExplicita(raio, xOrigem, yOrigem){
     let x = 0;
     let y = raio;
     let pontos = [];
@@ -143,8 +143,7 @@ class FiguraController {
   }
 
   //colocar parametros
-  //colocar parametros
-  async getCirculoPontoMedio(){
+  getCirculoPontoMedio(raio, xOrigem, yOrigem){
     const pontos = [];
     let x = 0;
     let y = raio;
@@ -193,7 +192,7 @@ class FiguraController {
   }
 
   //colocar parametros
-  async getCirculoMetodoTrigonometria(){
+  getCirculoMetodoTrigonometria(raio, xOrigem, yOrigem){
     
     const incrementoAngulo = Math.PI / 180;
     const pontos = [];
@@ -209,7 +208,7 @@ class FiguraController {
     
   }
 
-  async getElipsePontoMedio(elipseCenter, minorRadius){
+  getElipsePontoMedio(elipseCenter, minorRadius){
       var pontos = [];
   
       var dx, dy, d1, d2, x, y;

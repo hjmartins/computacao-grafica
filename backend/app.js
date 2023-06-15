@@ -1,15 +1,10 @@
 const express = require("express");
 
-const MySqlHandler = require("./services/mysql/mysqlModule.js");
-
 const app = express();
 const RoutesFiguras = require('./routes/figura.routes')
 const RoutesTransformacoes = require('./routes/transformações.routes')
 
-app.get("/", (req, res) => {
-  res.send("Server is working");
-});
-
+//ativa CORS para possibilitar usar servidor e fron-end na mesma maquina
 app.use(function (req, res, next) {
   res.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
   res.setHeader(
@@ -22,6 +17,10 @@ app.use(function (req, res, next) {
   );
   res.setHeader("Access-Control-Allow-Credentials", true);
   next();
+});
+
+app.get("/", (req, res) => {
+  res.send("Server is working");
 });
 
 app.use(RoutesFiguras);

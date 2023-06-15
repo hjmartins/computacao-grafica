@@ -3,7 +3,7 @@ const matriz = require('../util/matrizes')
 class Transformacao{
 
 // req should be in format -> [{"tipo_transformacao": "translacao", "params": {"param1":"param1", "param2": "param2", ...}},{"tipo_transformacao": "translacao", "params": {"param1":"param1", "param2": "param2", ...}][{"pontox": "x", "pontoY": "Y"},{"pontox": "x", "pontoY": "Y"},...]
-  async transformaPontos(req){
+  transformaPontos(req){
     let transformacoes = req[0]
     let pontosOriginais = req[1]
 
@@ -15,7 +15,8 @@ class Transformacao{
   
     return pontosTransformados
   }
-  async getTransformacao(tipo_transformacao, params){
+  
+  getTransformacao(tipo_transformacao, params){
     if(tipo_transformacao === 'translacao'){
       return this.translacao(params.transX,params.transY)
     }
@@ -33,11 +34,11 @@ class Transformacao{
     }
   }
 
-  async translacao(transX, transY){
+  translacao(transX, transY){
     return [[1, 1, transX], [1, 1, transY], [1, 1, 1]];
   }
 
-  async rotacao(angulo){
+  rotacao(angulo){
     let radians = (angulo * Math.PI) / 180;
 
     let cosO = Math.cos(radians);
@@ -46,11 +47,11 @@ class Transformacao{
     return [[cosO, -senO, 1], [senO, cosO, 1], [1, 1, 1]];
   }
 
-  async escala(escalaX,escalaY){
+  escala(escalaX,escalaY){
     return [[escalaX, 1, 1], [1, escalaY, 1], [1, 1, 1]];
   }
 
-  async cisalhamento(fatorCisalhamento,direcao){
+  cisalhamento(fatorCisalhamento,direcao){
     //cisalhamento em X
     if(direcao === 'x'){
       return [[1, fatorCisalhamento, 1], [1, 1, 1], [1, 1, 1]];
@@ -59,7 +60,7 @@ class Transformacao{
     return [[1, 1, 1], [fatorCisalhamento, 1, 1], [1, 1, 1]];
   }
 
-  async reflexao(eixo){
+  reflexao(eixo){
     //reflexao em X
     if(eixo === 'x'){
       return [[1, 1, 1], [1, -1, 1], [1, 1, 1]];

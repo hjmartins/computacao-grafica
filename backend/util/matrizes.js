@@ -1,6 +1,6 @@
 class Matrizes{
 
-  async multiplicaMatriz(matriz1, matriz2) {
+  multiplicaMatriz(matriz1, matriz2) {
     const rows1 = matriz1.length;
     const cols1 = matriz1[0].length;
     const rows2 = matriz2.length;
