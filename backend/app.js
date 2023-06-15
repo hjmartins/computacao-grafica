@@ -23,22 +23,10 @@ app.use(function (req, res, next) {
   res.setHeader("Access-Control-Allow-Credentials", true);
   next();
 });
+
 app.use(RoutesFiguras);
 app.use(RoutesTransformacoes);
 
 app.listen(3000, () => {
   console.log("Server is running on port 3000");
 });
-
-app.get("/mysql", (req, res) => {
-  const mysqlClass = new MySqlHandler();
-
-  mysqlClass.getAllData((err, results) => {
-    if (err) {
-      res.send(err);
-    } else {
-      res.send(results);
-    }
-  });
-});
-

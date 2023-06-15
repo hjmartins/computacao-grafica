@@ -1,0 +1,73 @@
+const matriz = require('../util/matrizes')
+
+class Transformacao{
+
+// req should be in format -> [{"tipo_transformacao": "translacao", "params": {"param1":"param1", "param2": "param2", ...}},{"tipo_transformacao": "translacao", "params": {"param1":"param1", "param2": "param2", ...}][{"pontox": "x", "pontoY": "Y"},{"pontox": "x", "pontoY": "Y"},...]
+  async transformaPontos(req){
+    let transformacoes = req[0]
+    let pontosOriginais = req[1]
+
+    m = [[1, 1, 1], [1, 1, 1], [1, 1, 1]];
+    transformacoes.map(transformacao => m = matriz.multiplicaMatriz(m, this.getTransformacao(transformacao.tipo_transformacao, transformacao.params)))
+
+    let pontosTransformados = []
+    pontosOriginais.map(ponto => pontosTransformados.push(matriz.multiplicaMatriz(m,[ponto.pontox, ponto.pontoy, 1])))
+  
+    return pontosTransformados
+  }
+  async getTransformacao(tipo_transformacao, params){
+    if(tipo_transformacao === 'translacao'){
+      return this.translacao(params.transX,params.transY)
+    }
+    if(tipo_transformacao === 'rotacao'){
+      return this.rotacao(params.angulo)
+    }
+    if(tipo_transformacao === 'escala'){
+      return this.escala(params.escalaX,params.escalaY)
+    }
+    if(tipo_transformacao === 'cisalhamento'){
+      return this.escala(params.fatorCisalhamento,params.direcao)
+    }
+    if(tipo_transformacao === 'reflexao'){
+      return this.rotacao(params.eixo)
+    }
+  }
+
+  async translacao(transX, transY){
+    return [[1, 1, transX], [1, 1, transY], [1, 1, 1]];
+  }
+
+  async rotacao(angulo){
+    let radians = (angulo * Math.PI) / 180;
+
+    let cosO = Math.cos(radians);
+    let senO = Math.sin(radians);
+
+    return [[cosO, -senO, 1], [senO, cosO, 1], [1, 1, 1]];
+  }
+
+  async escala(escalaX,escalaY){
+    return [[escalaX, 1, 1], [1, escalaY, 1], [1, 1, 1]];
+  }
+
+  async cisalhamento(fatorCisalhamento,direcao){
+    //cisalhamento em X
+    if(direcao === 'x'){
+      return [[1, fatorCisalhamento, 1], [1, 1, 1], [1, 1, 1]];
+    }
+    //cisalhamento em Y
+    return [[1, 1, 1], [fatorCisalhamento, 1, 1], [1, 1, 1]];
+  }
+
+  async reflexao(eixo){
+    //reflexao em X
+    if(eixo === 'x'){
+      return [[1, 1, 1], [1, -1, 1], [1, 1, 1]];
+    }
+    //reflexao em Y
+    return [[-1, 1, 1], [1, 1, 1], [1, 1, 1]];
+  }
+
+}
+
+module.exports = new Transformacao()

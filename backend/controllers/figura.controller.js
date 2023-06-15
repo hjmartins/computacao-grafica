@@ -1,10 +1,10 @@
 class FiguraController {
   
   async getRetaDDA(x1,y1,x2,y2){    
-    pontos = []
+    let pontos = []
 
     //descobre tamanho da reta
-    length = x2-x1
+    let length = x2-x1
 
     //caso a distancia no eixo y seja maior q a distancia no eixo X ela é utilizada
     if(y2-y1 > length){
@@ -12,12 +12,12 @@ class FiguraController {
     }
 
     //calcula o incremento de X e Y
-    xInc = (x2-x1)/length
-    yInc = (y2-y1)/length
+    let xInc = (x2-x1)/length
+    let yInc = (y2-y1)/length
 
     //define os pontos iniciais e os coloca no ArrayList "pontosReta"
-    x = x1
-    y = y1
+    let x = x1
+    let y = y1
 
     pontos.push({pontoX:round(x), pontoY:round(y)})
 
@@ -33,12 +33,12 @@ class FiguraController {
   }
 
   async getRetaPontoMedio(x1,y1,x2,y2){
-    pontos = []
+    let pontos = []
 
-    auxX1 = x1
-    auxY1 = y1
-    auxX2 = x2
-    auxY2 = y2
+    let auxX1 = x1
+    let auxY1 = y1
+    let auxX2 = x2
+    let auxY2 = y2
 
     //caso o ponto 1 seja maior q o ponto 2, fazemos a inversao dos pontos
     if(x1 > x2){
@@ -50,10 +50,14 @@ class FiguraController {
       auxY2 = y1  
     }
 
-    dx = auxX2-auxX1
-    dy = auxY2-auxY1
+    let dx = auxX2-auxX1
+    let dy = auxY2-auxY1
 
-    m = dy/dx
+    let m = dy/dx
+
+    let IncE;
+    let IncNE;
+    let ds;
 
     if(m < 1 && m > 0){
       IncE = 2 * (dy);
@@ -66,7 +70,7 @@ class FiguraController {
       ds = (2 * dx) - dy;
     }
 
-    d = ds;
+    let d = ds;
 
     //derivacao da funcao para desenhar a reta em qualquer oitante
     if(m < 1 && m > 0){
@@ -105,6 +109,7 @@ class FiguraController {
     return pontos
   }
 
+  //colocar parametros
   async getCirculoEquacaoExplicita(){
     let x = 0;
     let y = raio;
@@ -137,6 +142,8 @@ class FiguraController {
     return pontos;
   }
 
+  //colocar parametros
+  //colocar parametros
   async getCirculoPontoMedio(){
     const pontos = [];
     let x = 0;
@@ -185,6 +192,7 @@ class FiguraController {
     return pontos;
   }
 
+  //colocar parametros
   async getCirculoMetodoTrigonometria(){
     
     const incrementoAngulo = Math.PI / 180;
@@ -202,7 +210,6 @@ class FiguraController {
   }
 
   async getElipsePontoMedio(elipseCenter, minorRadius){
-    function pontoMedio() {
       var pontos = [];
   
       var dx, dy, d1, d2, x, y;
@@ -268,8 +275,6 @@ class FiguraController {
           }
       }
       return pontos;
-  }
-  
   }
 }
 
