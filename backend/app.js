@@ -3,7 +3,8 @@ const express = require("express");
 const MySqlHandler = require("./services/mysql/mysqlModule.js");
 
 const app = express();
-const RoutesFiguras = require('./routes/figura.js')
+const RoutesFiguras = require('./routes/figura.routes')
+const RoutesTransformacoes = require('./routes/transformações.routes')
 
 app.get("/", (req, res) => {
   res.send("Server is working");
@@ -23,6 +24,7 @@ app.use(function (req, res, next) {
   next();
 });
 app.use(RoutesFiguras);
+app.use(RoutesTransformacoes);
 
 app.listen(3000, () => {
   console.log("Server is running on port 3000");

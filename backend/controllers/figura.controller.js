@@ -1,6 +1,7 @@
 class FiguraController {
+  
   async getRetaDDA(){
-    
+    //TODO
   }
 
   async getRetaPontoMedio(){
