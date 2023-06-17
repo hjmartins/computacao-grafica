@@ -3,8 +3,8 @@ const express = require('express')
 const router = express.Router()
 
 const path = require('path')
-const controller2d = require('../controllers/transformacao2d.controller')
-const controller3d = require('../controllers/transformacao3d.controller')
+const controller2d = require('../controllers/transformacaoFiguras2d.controller')
+const controller3d = require('../controllers/transformacaoFiguras3d.controller')
 
 const TRANSFORMACAO2D = '/transformacao-2d';
 const TRANSFORMACAO3D = '/transformacao-3d';
