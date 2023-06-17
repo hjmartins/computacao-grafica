@@ -23,6 +23,9 @@ app.use(function (req, res, next) {
   next();
 });
 
+// Middleware para fazer o parse do corpo da requisição
+app.use(express.json());
+
 app.get("/", (req, res) => {
   res.send("Server is working");
 });
