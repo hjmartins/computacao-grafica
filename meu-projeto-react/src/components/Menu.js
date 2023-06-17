@@ -22,9 +22,9 @@ const Menu = () => {
             Alunos
           </Link>
         </li>
-        <li className={currentPage === 'contato' ? 'active' : ''}>
-          <Link to="/contato" onClick={() => handlePageChange('contato')}>
-            Contato
+        <li className={currentPage === 'dda' ? 'active' : ''}>
+          <Link to="/dda" onClick={() => handlePageChange('dda')}>
+            DDA
           </Link>
         </li>
       </ul>

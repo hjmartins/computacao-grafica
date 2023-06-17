@@ -1,13 +1,16 @@
 const express = require("express");
 
 const app = express();
-const port = 3030;
+
+const port = 9090;
+const portFront = 3000;
+
 const RoutesFiguras = require('./routes/figura.routes')
 const RoutesTransformacoes = require('./routes/transformações.routes')
 
 //ativa CORS para possibilitar usar servidor e fron-end na mesma maquina
 app.use(function (req, res, next) {
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
+  res.setHeader("Access-Control-Allow-Origin", `http://localhost:${portFront}`);
   res.setHeader(
     "Access-Control-Allow-Methods",
     "GET, POST, OPTIONS, PUT, PATCH, DELETE"
