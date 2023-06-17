@@ -17,39 +17,39 @@ const ELIPSEPONTOMEDIO = '/figura/elipse/ponto-medio';
 //todos os retornos sao [{pontox1:x, pontoy1:y}, {pontox2:x, pontoy2:y},...]
 
 //req should be -> [{"ponto1X": "x1", "ponto1Y": "y1"}, {"ponto2X": "x2", "ponto2Y": "y2"}]
-router.get(RETADDA, (req, res, next) => {
-  const [{ponto1X, ponto1Y}, {ponto2X, ponto2Y}] = JSON.parse(req)
-	res.send(controller.getRetaDDA(ponto1X, ponto1Y, ponto2X, ponto2Y))
+router.post(RETADDA, (req, res, next) => {
+  const [{ pontox: pontox1, pontoy: pontoy1 }, { pontox: pontox2, pontoy: pontoy2 }] = req.body;
+  res.send(controller.getRetaDDA(parseInt(pontox1), parseInt(pontoy1), parseInt(pontox2), parseInt(pontoy2)))
 })
 
 //req should be -> [{"ponto1X": "x1", "ponto1Y": "y1"}, {"ponto2X": "x2", "ponto2Y": "y2"}]
-router.get(RETAPONTOMEDIO, (req, res, next) => {
-  const [{ponto1X, ponto1Y}, {ponto2X, ponto2Y}] = JSON.parse(req)
-	res.send(controller.getRetaPontoMedio(ponto1X, ponto1Y, ponto2X, ponto2Y))
+router.post(RETAPONTOMEDIO, (req, res, next) => {
+  const [{ pontox: pontox1, pontoy: pontoy1 }, { pontox: pontox2, pontoy: pontoy2 }] = req.body;
+	res.send(controller.getRetaPontoMedio(parseInt(pontox1), parseInt(pontoy1), parseInt(pontox2), parseInt(pontoy2)))
 })
 
 //req should be -> [{"raio": "r", "xOrigem": "xOrigem", "yOrigem":"yOrigem"}]
-router.get(CIRCULOEXPLICITA, (req, res, next) => {
-  const [{raio, xOrigem, yOrigem}] = JSON.parse(req)
-	res.send(controller.getCirculoEquacaoExplicita(raio, xOrigem, yOrigem))
+router.post(CIRCULOEXPLICITA, (req, res, next) => {
+  const [{raio, xOrigem, yOrigem}] = req.body
+	res.send(controller.getCirculoEquacaoExplicita(parseInt(raio), parseInt(xOrigem), parseInt(yOrigem)))
 })
 
 //req should be -> [{"raio": "r", "xOrigem": "xOrigem", "yOrigem":"yOrigem"}]
-router.get(CIRCULOTRIGONOMETRIA, (req, res, next) => {
-  const [{raio, xOrigem, yOrigem}] = JSON.parse(req)
-	res.send(controller.getCirculoPontoMedio(raio, xOrigem, yOrigem))
+router.post(CIRCULOTRIGONOMETRIA, (req, res, next) => {
+  const [{raio, xOrigem, yOrigem}] = req.body
+	res.send(controller.getCirculoPontoMedio(parseInt(raio), parseInt(xOrigem), parseInt(yOrigem)))
 })
 
 //req should be -> [{"raio": "r", "xOrigem": "xOrigem", "yOrigem":"yOrigem"}]
-router.get(CIRCULOPONTOMEDIO, (req, res, next) => {
-  const [{raraio, xOrigem, yOrigemio}] = JSON.parse(req)
-	res.send(controller.getCirculoMetodoTrigonometria(raio, xOrigem, yOrigem))
+router.post(CIRCULOPONTOMEDIO, (req, res, next) => {
+  const [{raraio, xOrigem, yOrigemio}] = req.body
+	res.send(controller.getCirculoMetodoTrigonometria(parseInt(raio), parseInt(xOrigem), parseInt(yOrigem)))
 })
 
 //req should be -> [{"ElipseCenter": "centerPos", "MinorRadius": "minorRadioSize"}]
-router.get(ELIPSEPONTOMEDIO, (req, res, next) => {
-  const [{ElipseCenter, MinorRadius}] = JSON.parse(req)
-	res.send(controller.getElipsePontoMedio(ElipseCenter, MinorRadius))
+router.post(ELIPSEPONTOMEDIO, (req, res, next) => {
+  const [{ElipseCenter, MinorRadius}] = req.body
+	res.send(controller.getElipsePontoMedio(parseInt(ElipseCenter), parseInt(MinorRadius)))
 })
 
 module.exports = router

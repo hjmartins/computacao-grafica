@@ -28,7 +28,7 @@ class FiguraController {
 
       pontos.push({pontox: Math.round(x), pontoy: Math.round(y)})      
     }
-
+    console.log(pontos)
     return pontos
   }
 
