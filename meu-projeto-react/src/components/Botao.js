@@ -1,12 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import Botao from '../components/Botao';
+import '../styles/Home.css';
 
-const Botao = () => {
+const Home = () => {
   return (
-    <div className="botao-container">
-      <Link to="/outra-pagina" className="botao-link">Ir para outra página</Link>
+    <div className="home-container">
+      <h1>Bem-vindo à Página Home</h1>
+      <Botao />
     </div>
   );
 }
 
-export default Botao;
+export default Home;

@@ -1,12 +1,14 @@
 import React from 'react';
-import Botao from '../components/Botao';
+import { Link } from 'react-router-dom';
 import '../styles/Home.css';
 
 const Home = () => {
   return (
     <div className="home-container">
-      <h1>Bem-vindo à Página Home</h1>
-      <Botao />
+      <h1>Bem-vindo à Página Inicial</h1>
+      <Link to="/sobre" className="btn">
+        Ir para a página Sobre
+      </Link>
     </div>
   );
 }

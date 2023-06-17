@@ -8,3 +8,30 @@ body {
   font-family: Arial, sans-serif;
   color: #fff;
 }
+
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.botao-container {
+  margin-top: 20px;
+}
+
+.botao-link {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #502bc0;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.botao-link:hover {
+  background-color: #502bc0;
+}

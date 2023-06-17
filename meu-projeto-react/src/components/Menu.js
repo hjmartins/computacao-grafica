@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import '../styles/Menu.css';
 
 const Menu = () => {
@@ -9,22 +10,22 @@ const Menu = () => {
   };
 
   return (
-    <nav className="menu menu-container">
+    <nav className="menu">
       <ul>
         <li className={currentPage === 'home' ? 'active' : ''}>
-          <a href="#" onClick={() => handlePageChange('home')}>
+          <Link to="/" onClick={() => handlePageChange('home')}>
             Home
-          </a>
+          </Link>
         </li>
         <li className={currentPage === 'sobre' ? 'active' : ''}>
-          <a href="#sobre" onClick={() => handlePageChange('sobre')}>
+          <Link to="/sobre" onClick={() => handlePageChange('sobre')}>
             Alunos
-          </a>
+          </Link>
         </li>
         <li className={currentPage === 'contato' ? 'active' : ''}>
-          <a href="#" onClick={() => handlePageChange('contato')}>
+          <Link to="/contato" onClick={() => handlePageChange('contato')}>
             Contato
-          </a>
+          </Link>
         </li>
       </ul>
     </nav>
