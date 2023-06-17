@@ -3,6 +3,18 @@ class FiguraController {
   getRetaDDA(x1,y1,x2,y2){    
     let pontos = []
 
+    let aux
+
+    if(x2 < x1){
+      aux = x2
+      x2 = x1
+      x1 = aux
+    }
+    if(y2 < y1){
+      aux = y2
+      y2 = y1
+      y1 = aux
+    }
     //descobre tamanho da reta
     let length = x2-x1
 
@@ -28,7 +40,6 @@ class FiguraController {
 
       pontos.push({pontox: Math.round(x), pontoy: Math.round(y)})      
     }
-    console.log(pontos)
     return pontos
   }
 

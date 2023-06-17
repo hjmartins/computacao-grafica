@@ -1,13 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Menu from '../components/Menu';
 import '../styles/Dda.css'; // Importe o arquivo CSS para estilização
+import axios from 'axios';
 
 function DDA() {
   const [valuex1, setValuex1] = useState('');
   const [valuey1, setValuey1] = useState('');
-
   const [valuex2, setValuex2] = useState('');
   const [valuey2, setValuey2] = useState('');
+  const canvasRef = useRef(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const context = canvas.getContext('2d');
+
+    // Limpar o canvas
+    context.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Desenhar a linha com base nos valores retornados pela API
+    const responseLine = { startX: 100, startY: 100, endX: 200, endY: 200 }; // Exemplo
+    const { startX, startY, endX, endY } = responseLine;
+
+    context.beginPath();
+    context.moveTo(startX, startY);
+    context.lineTo(endX, endY);
+    context.stroke();
+  }, [valuex1, valuey1, valuex2, valuey2]);
 
   const fetchData = () => {
     const arrayData = [
@@ -15,16 +33,14 @@ function DDA() {
       { pontox: valuex2, pontoy: valuey2 }
     ];
 
-    fetch('http://localhost:9090/figura/reta/dda', {
-      method: 'GET',
-      body: JSON.stringify(arrayData)
-    })
-      .then(response => response.json())
-      .then(data => {
-        console.log(data);
+    axios
+      .post('http://localhost:9090/figura/reta/dda', arrayData)
+      .then(response => {
+        console.log(response.data);
+        console.log(response);
       })
       .catch(error => {
-        console.log(error);
+        console.error(error);
       });
   };
 
@@ -68,7 +84,7 @@ function DDA() {
     <div>
       <Menu />
       <h1>Reta DDA</h1>
-  
+
       <div className="input-card">
         <h2>Ponto 1</h2>
         <div className="input-row">
@@ -82,7 +98,7 @@ function DDA() {
           </div>
         </div>
       </div>
-  
+
       <div className="input-card">
         <h2>Ponto 2</h2>
         <div className="input-row">
@@ -96,10 +112,14 @@ function DDA() {
           </div>
         </div>
       </div>
-  
-      <button onClick={fetchData}>Desenhar</button>
+
+      <div className="button-container">
+        <button onClick={fetchData}>Desenhar</button>
+      </div>
+
+      <canvas ref={canvasRef} width={400} height={400} />
     </div>
-  ); 
+  );
 }
 
 export default DDA;
