@@ -1,0 +1,10 @@
+/* Sobre.css */
+body {
+  background-color: #000;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  font-family: Arial, sans-serif;
+  color: #fff;
+}
