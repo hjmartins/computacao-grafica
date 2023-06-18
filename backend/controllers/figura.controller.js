@@ -31,7 +31,7 @@ class FiguraController {
     let x = x1
     let y = y1
     
-    pontos.push({pontoX: Math.round(x), pontoY: Math.round(y)})
+    pontos.push({pontox: Math.round(x), pontoy: Math.round(y)})
 
     //enquanto x for menor que y o algoritmo incrementa a posicao do ponto e o coloca no Arraylist "pontosReta"
     while(x < x2){
@@ -91,12 +91,12 @@ class FiguraController {
               auxY1 += 1;
               d += IncNE;
 
-              pontos.push({pontox:auxX1, pontoY:auxY1})
+              pontos.push({pontox:auxX1, pontoy:auxY1})
           } else {
               auxX1 += 1;
               d += IncE;
 
-              pontos.push({pontox:auxX1, pontoY:auxY1})
+              pontos.push({pontox:auxX1, pontoy:auxY1})
           }
         }
     }else{
@@ -106,13 +106,13 @@ class FiguraController {
                 auxY1 += 1;
                 d += IncNE;
 
-                pontos.push({pontox:auxX1, pontoY:auxY1})
+                pontos.push({pontox:auxX1, pontoy:auxY1})
             }
             else{
                 auxY1+=1;
                 d+=IncE;
 
-                pontos.push({pontox:auxX1, pontoY:auxY1})
+                pontos.push({pontox:auxX1, pontoy:auxY1})
             }
         }
     }
@@ -143,8 +143,8 @@ class FiguraController {
         [-y, -x]
       ];
     
-      pontosSimetricos.forEach(([pontoX, pontoY]) => {
-        pontos.push([pontoX + xOrigem, pontoY + yOrigem]);
+      pontosSimetricos.forEach(([pontox, pontoy]) => {
+        pontos.push([pontox + xOrigem, pontoy + yOrigem]);
       });
     }
     
@@ -192,8 +192,8 @@ class FiguraController {
         [-y, -x]
       ];
     
-      pontosSimetricos.forEach(([pontoX, pontoY]) => {
-        pontos.push([pontoX + xOrigem, pontoY + yOrigem]);
+      pontosSimetricos.forEach(([pontox, pontoy]) => {
+        pontos.push([pontox + xOrigem, pontoy + yOrigem]);
       });
     }
     
