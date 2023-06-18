@@ -42,7 +42,7 @@ router.post(CIRCULOTRIGONOMETRIA, (req, res, next) => {
 
 //req should be -> [{"raio": "r", "xOrigem": "xOrigem", "yOrigem":"yOrigem"}]
 router.post(CIRCULOPONTOMEDIO, (req, res, next) => {
-  const [{raraio, xOrigem, yOrigemio}] = req.body
+  const [{raio, xOrigem, yOrigemio}] = req.body
 	res.send(controller.getCirculoMetodoTrigonometria(parseInt(raio), parseInt(xOrigem), parseInt(yOrigem)))
 })
 

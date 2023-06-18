@@ -121,17 +121,17 @@ class FiguraController {
   }
 
   //colocar parametros
-  getCirculoEquacaoExplicita(raio, xOrigem, yOrigem){
+  getCirculoEquacaoExplicita(raio, xOrigem, yOrigem) {
+    const pontos = [];
     let x = 0;
     let y = raio;
-    let pontos = [];
-    
+  
     pontos.push([x + xOrigem, y + yOrigem]);
-    
+  
     while (x <= y) {
-      x++;
-      y = Math.sqrt(raio * raio - x * x);
-      
+      x = x + 1;
+      y = Math.round(Math.sqrt(raio * raio - x * x));
+  
       const pontosSimetricos = [
         [x, y],
         [-x, y],
@@ -142,14 +142,12 @@ class FiguraController {
         [y, -x],
         [-y, -x]
       ];
-    
+  
       pontosSimetricos.forEach(([pontox, pontoy]) => {
         pontos.push([pontox + xOrigem, pontoy + yOrigem]);
       });
     }
-    
-    pontos.push({ pontox: x - 1, pontoy: y });
-
+  
     return pontos;
   }
 
@@ -217,6 +215,7 @@ class FiguraController {
     const ultimoPonto = pontos[pontos.length - 1];
     pontos.push({ pontox: ultimoPonto[0], pontoy: ultimoPonto[1] });
     
+    return pontos;
   }
 
   getElipsePontoMedio(elipseCenter, minorRadius){

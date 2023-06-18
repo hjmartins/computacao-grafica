@@ -1,9 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
-import Menu from '../components/Menu';
-import '../styles/Retas.css'; // Importe o arquivo CSS para estilização
+import Menu from '../../components/Menu';
+import '../../styles/Retas.css'; // Importe o arquivo CSS para estilização
 import axios from 'axios';
 
-function PontoM() {
+function DDA() {
+
+  const porta = '9090';
+  const rota = 'reta/dda';
+
   const [formData, setFormData] = useState({
     valuex1: '',
     valuey1: '',
@@ -20,7 +24,7 @@ function PontoM() {
     ];
 
     axios
-      .post('http://localhost:9090/figura/reta/ponto-medio', arrayData)
+      .post(`http://localhost:${porta}/figura/${rota}`, arrayData)
       .then(response => {
         setLines(response.data);
       })
@@ -46,29 +50,21 @@ function PontoM() {
   useEffect(() => {
     const canvas = canvasRef.current;
     const context = canvas.getContext('2d');
-  
-    // Função para desenhar as retas no canvas
-    const drawLines = () => {
-      // Limpar o canvas
-      context.clearRect(0, 0, canvas.width, canvas.height);
-  
-      // Desenhar as retas
-      lines.forEach(line => {
-        const { pontox, pontoy } = line;
-        context.fillRect(pontox, pontoy, 1, 1);
 
-      });
-    };
-  
-    // Chamar a função de desenho após a atualização do estado lines
-    drawLines();
+    // Limpar o canvas
+    context.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Desenhar as retas
+    lines.forEach(line => {
+      const { pontox, pontoy } = line;
+      context.fillRect(pontox, pontoy, 1, 1);
+    });
   }, [lines]);
-  
 
   return (
     <div>
       <Menu />
-      <h1>Reta Ponto Médio</h1>
+      <h1>Reta DDA</h1>
 
       <form onSubmit={handleSubmit} className="input-card">
         <h2>Ponto 1</h2>
@@ -101,10 +97,10 @@ function PontoM() {
       </form>
 
       <div className="canvas-container">
-        <canvas ref={canvasRef} width={500} height={500} />
+        <canvas ref={canvasRef} />
       </div>
     </div>
   );
 }
 
-export default PontoM;
+export default DDA;

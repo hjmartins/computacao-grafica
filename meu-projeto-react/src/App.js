@@ -5,8 +5,10 @@ import Menu from './components/Menu';
 
 import Home from './pages/Home';
 import Sobre from './pages/Sobre';
-import Dda from './pages/Dda';
-import PontoM from './pages/PontoM';
+import RDda from './pages/Retas/Dda';
+import RPontoM from './pages/Retas/PontoM';
+import CExplicita from './pages/Circulo/Explicita';
+import CTrigonometrica from './pages/Circulo/Trigonometria';
 
 const App = () => {
   return (
@@ -14,8 +16,10 @@ const App = () => {
       <Menu />
       <Route exact path="/" component={Home} />
       <Route path="/sobre" component={Sobre} />
-      <Route path="/dda" component={Dda} />
-      <Route path="/pontom" component={PontoM} />
+      <Route path="/retas/dda" component={RDda} />
+      <Route path="/retas/pontom" component={RPontoM} />
+      <Route path="/circulos/explicita" component={CExplicita} />
+      <Route path="/circulos/trigonometrica" component={CTrigonometrica} />
     </Router>
   );
 }

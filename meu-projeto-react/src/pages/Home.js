@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <div className="home-container">
       <h1>Bem-vindo à Página Inicial</h1>
-      <Link to="/dda" className="btn">
+      <Link to="/retas/dda" className="btn">
         Ir para a página Sobre
       </Link>
     </div>

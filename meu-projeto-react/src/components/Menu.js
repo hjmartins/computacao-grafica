@@ -23,13 +23,23 @@ const Menu = () => {
           </Link>
         </li>
         <li className={currentPage === 'dda' ? 'active' : ''}>
-          <Link to="/dda" onClick={() => handlePageChange('dda')}>
+          <Link to="/retas/dda" onClick={() => handlePageChange('dda')}>
             DDA
           </Link>
         </li>
         <li className={currentPage === 'pontom' ? 'active' : ''}>
-          <Link to="/pontom" onClick={() => handlePageChange('pontom')}>
+          <Link to="/retas/pontom" onClick={() => handlePageChange('pontom')}>
             Ponto Médio
+          </Link>
+        </li>
+        <li className={currentPage === 'explicita' ? 'active' : ''}>
+          <Link to="/circulos/explicita" onClick={() => handlePageChange('explicita')}>
+            Circulo Explicita
+          </Link>
+        </li>
+        <li className={currentPage === 'trigonometrica' ? 'active' : ''}>
+          <Link to="/circulos/trigonometrica" onClick={() => handlePageChange('trigonometrica')}>
+            Circulo Trigonometrico
           </Link>
         </li>
       </ul>
