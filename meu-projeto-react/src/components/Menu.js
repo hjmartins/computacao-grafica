@@ -27,6 +27,11 @@ const Menu = () => {
             DDA
           </Link>
         </li>
+        <li className={currentPage === 'pontom' ? 'active' : ''}>
+          <Link to="/pontom" onClick={() => handlePageChange('pontom')}>
+            Ponto Médio
+          </Link>
+        </li>
       </ul>
     </nav>
   );
