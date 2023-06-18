@@ -2,21 +2,22 @@ import React, { useState, useEffect, useRef } from 'react';
 import Menu from '../components/Menu';
 import '../styles/Dda.css'; // Importe o arquivo CSS para estilização
 import axios from 'axios';
-import { handleButtonClick } from './teste';
+import { handleButtonClick } from '../components/CanvaDrawing2D';
 
 
 function DDA() {
-  const [valuex1, setValuex1] = useState('');
-  const [valuey1, setValuey1] = useState('');
-  const [valuex2, setValuex2] = useState('');
-  const [valuey2, setValuey2] = useState('');
-  
+  const [formData, setFormData] = useState({
+    valuex1: '',
+    valuey1: '',
+    valuex2: '',
+    valuey2: ''
+  });
   const canvasRef = useRef(null);
 
   const fetchData = () => {
     const arrayData = [
-      { pontox: valuex1, pontoy: valuey1 },
-      { pontox: valuex2, pontoy: valuey2 }
+      { pontox: parseInt(formData.valuex1), pontoy: parseInt(formData.valuey1) },
+      { pontox: parseInt(formData.valuex2), pontoy: parseInt(formData.valuey2) }
     ];
 
     axios
@@ -29,40 +30,17 @@ function DDA() {
       });
   };
 
-  const handleChangex1 = e => {
-    const inputValuex = parseInt(e.target.value);
-    if (!isNaN(inputValuex)) {
-      setValuex1(inputValuex);
-    } else {
-      setValuex1(0);
-    }
+  const handleChange = e => {
+    const { name, value } = e.target;
+    setFormData(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
   };
 
-  const handleChangey1 = e => {
-    const inputValuey = parseInt(e.target.value);
-    if (!isNaN(inputValuey)) {
-      setValuey1(inputValuey);
-    } else {
-      setValuey1(0);
-    }
-  };
-
-  const handleChangex2 = e => {
-    const inputValuex = parseInt(e.target.value);
-    if (!isNaN(inputValuex)) {
-      setValuex2(inputValuex);
-    } else {
-      setValuex2(0);
-    }
-  };
-
-  const handleChangey2 = e => {
-    const inputValuey = parseInt(e.target.value);
-    if (!isNaN(inputValuey)) {
-      setValuey2(inputValuey);
-    } else {
-      setValuey2(0);
-    }
+  const handleSubmit = e => {
+    e.preventDefault();
+    fetchData();
   };
 
   return (
@@ -70,39 +48,37 @@ function DDA() {
       <Menu />
       <h1>Reta DDA</h1>
 
-      <div className="input-card">
+      <form onSubmit={handleSubmit} className="input-card">
         <h2>Ponto 1</h2>
         <div className="input-row">
           <div className="input-group">
             <label>Valor x1:</label>
-            <input type="number" value={valuex1} onChange={handleChangex1} />
+            <input type="number" name="valuex1" value={formData.valuex1} onChange={handleChange} />
           </div>
           <div className="input-group">
             <label>Valor y1:</label>
-            <input type="number" value={valuey1} onChange={handleChangey1} />
+            <input type="number" name="valuey1" value={formData.valuey1} onChange={handleChange} />
           </div>
         </div>
-      </div>
 
-      <div className="input-card">
         <h2>Ponto 2</h2>
         <div className="input-row">
           <div className="input-group">
             <label>Valor x2:</label>
-            <input type="number" value={valuex2} onChange={handleChangex2} />
+            <input type="number" name="valuex2" value={formData.valuex2} onChange={handleChange} />
           </div>
           <div className="input-group">
             <label>Valor y2:</label>
-            <input type="number" value={valuey2} onChange={handleChangey2} />
+            <input type="number" name="valuey2" value={formData.valuey2} onChange={handleChange} />
           </div>
         </div>
-      </div>
 
-      <div className="button-container">
-        <button onClick={fetchData}>Desenhar</button>
-      </div>
+        <div className="button-container">
+          <button type="submit">Desenhar</button>
+        </div>
+      </form>
 
-      <div>
+      <div className="canvas-container">
         <canvas ref={canvasRef} width={500} height={500} />
       </div>
     </div>
