@@ -5,10 +5,14 @@ import Menu from './components/Menu';
 
 import Home from './pages/Home';
 import Sobre from './pages/Sobre';
+
+// Retas
 import RDda from './pages/Retas/Dda';
 import RPontoM from './pages/Retas/PontoM';
+//Circulos
 import CExplicita from './pages/Circulo/Explicita';
 import CTrigonometrica from './pages/Circulo/Trigonometria';
+import CPontoM from './pages/Circulo/CPontoM';
 
 const App = () => {
   return (
@@ -20,6 +24,7 @@ const App = () => {
       <Route path="/retas/pontom" component={RPontoM} />
       <Route path="/circulos/explicita" component={CExplicita} />
       <Route path="/circulos/trigonometrica" component={CTrigonometrica} />
+      <Route path="/circulos/cpontom" component={CPontoM} />
     </Router>
   );
 }

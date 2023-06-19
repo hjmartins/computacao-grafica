@@ -6,7 +6,7 @@ import axios from 'axios';
 function CPontoM() {
 
     const porta = '9090';
-    const rota = 'circulo/trigonometria';
+    const rota = 'circulo/ponto-medio';
 
     const [formData, setFormData] = useState({
       raio: '',
@@ -71,7 +71,7 @@ function CPontoM() {
     return (
       <div>
         <Menu />
-        <h1>Circulo Trigonometrico</h1>
+        <h1>Circulo Ponto Medio</h1>
 
         <form onSubmit={handleSubmit} className="input-card">
           <h2>Ponto X e Y</h2>

@@ -35,14 +35,14 @@ router.post(CIRCULOEXPLICITA, (req, res, next) => {
 })
 
 //req should be -> [{"raio": "r", "xOrigem": "xOrigem", "yOrigem":"yOrigem"}]
-router.post(CIRCULOTRIGONOMETRIA, (req, res, next) => {
+router.post(CIRCULOPONTOMEDIO, (req, res, next) => {
   const [{raio, xOrigem, yOrigem}] = req.body
 	res.send(controller.getCirculoPontoMedio(parseInt(raio), parseInt(xOrigem), parseInt(yOrigem)))
 })
 
 //req should be -> [{"raio": "r", "xOrigem": "xOrigem", "yOrigem":"yOrigem"}]
-router.post(CIRCULOPONTOMEDIO, (req, res, next) => {
-  const [{raio, xOrigem, yOrigemio}] = req.body
+router.post(CIRCULOTRIGONOMETRIA, (req, res, next) => {
+  const [{raio, xOrigem, yOrigem}] = req.body
 	res.send(controller.getCirculoMetodoTrigonometria(parseInt(raio), parseInt(xOrigem), parseInt(yOrigem)))
 })
 

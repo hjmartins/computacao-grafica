@@ -196,7 +196,7 @@ class FiguraController {
     }
     
     pontos.push({ pontox: x - 1, pontoy: y });
-
+    
     return pontos;
   }
 

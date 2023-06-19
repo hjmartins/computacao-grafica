@@ -27,19 +27,24 @@ const Menu = () => {
             DDA
           </Link>
         </li>
-        <li className={currentPage === 'pontom' ? 'active' : ''}>
-          <Link to="/retas/pontom" onClick={() => handlePageChange('pontom')}>
+        <li className={currentPage === '/retas/pontom' ? 'active' : ''}>
+          <Link to="/retas/pontom" onClick={() => handlePageChange('/retas/pontom')}>
             Ponto Médio
           </Link>
         </li>
-        <li className={currentPage === 'explicita' ? 'active' : ''}>
-          <Link to="/circulos/explicita" onClick={() => handlePageChange('explicita')}>
+        <li className={currentPage === '/circulos/explicita' ? 'active' : ''}>
+          <Link to="/circulos/explicita" onClick={() => handlePageChange('/circulos/explicita')}>
             Circulo Explicita
           </Link>
         </li>
-        <li className={currentPage === 'trigonometrica' ? 'active' : ''}>
-          <Link to="/circulos/trigonometrica" onClick={() => handlePageChange('trigonometrica')}>
+        <li className={currentPage === '/circulos/trigonometrica' ? 'active' : ''}>
+          <Link to="/circulos/trigonometrica" onClick={() => handlePageChange('/circulos/trigonometrica')}>
             Circulo Trigonometrico
+          </Link>
+        </li>
+        <li className={currentPage === '/circulos/cpontom' ? 'active' : ''}>
+          <Link to="/circulos/cpontom" onClick={() => handlePageChange('/circulos/cpontom')}>
+            Circulo Ponto Medio
           </Link>
         </li>
       </ul>

@@ -15,7 +15,6 @@ function PontoM() {
     valuey2: ''
   });
   const [lines, setLines] = useState([]);
-  const canvasRef = useRef(null);
 
   const fetchData = () => {
     const arrayData = [
@@ -47,25 +46,38 @@ function PontoM() {
     fetchData();
   };
 
+  const canvasRef = useRef(null);
+
   useEffect(() => {
     const canvas = canvasRef.current;
     const context = canvas.getContext('2d');
   
-    // Função para desenhar as retas no canvas
-    const drawLines = () => {
-      // Limpar o canvas
-      context.clearRect(0, 0, canvas.width, canvas.height);
+    // Obter as dimensões da janela
+    const windowWidth = window.innerWidth;
+    const windowHeight = window.innerHeight;
   
-      // Desenhar as retas
-      lines.forEach(line => {
-        const { pontox, pontoy } = line;
-        context.fillRect(pontox, pontoy, 1, 1);
-
-      });
-    };
+    // Definir o ponto médio da janela
+    const centerX = windowWidth / 2;
+    const centerY = windowHeight / 2;
   
-    // Chamar a função de desenho após a atualização do estado lines
-    drawLines();
+    // Definir as coordenadas do ponto médio no canvas
+    const canvasCenterX = centerX;
+    const canvasCenterY = centerY;
+  
+    // Definir o tamanho do canvas
+    canvas.width = windowWidth;
+    canvas.height = windowHeight;
+  
+    // Desenhar as retas
+    lines.forEach(line => {
+      const { pontox, pontoy } = line;
+  
+      // Calcular as coordenadas no canvas
+      const canvasX = canvasCenterX + pontox;
+      const canvasY = canvasCenterY - pontoy;
+  
+      context.fillRect(canvasX, canvasY, 1, 1);
+    });
   }, [lines]);
   
 

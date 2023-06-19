@@ -3,10 +3,10 @@ import Menu from '../../components/Menu';
 import '../../styles/Retas.css'; // Importe o arquivo CSS para estilização
 import axios from 'axios';
 
-function CPontoM() {
+function Explicita() {
 
     const porta = '9090';
-    const rota = 'circulo/trigonometria';
+    const rota = 'elipse/ponto-medio';
 
     const [formData, setFormData] = useState({
       raio: '',
@@ -25,6 +25,7 @@ function CPontoM() {
         .post(`http://localhost:${porta}/figura/${rota}`, arrayData)
         .then(response => {
           setData(response.data);
+          console.log(response.data)
         })
         .catch(error => {
           console.error(error);
@@ -71,7 +72,7 @@ function CPontoM() {
     return (
       <div>
         <Menu />
-        <h1>Circulo Trigonometrico</h1>
+        <h1>Circulo Explicita</h1>
 
         <form onSubmit={handleSubmit} className="input-card">
           <h2>Ponto X e Y</h2>
@@ -102,4 +103,4 @@ function CPontoM() {
     );
 }
 
-export default CPontoM;
+export default Explicita;

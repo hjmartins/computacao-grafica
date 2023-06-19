@@ -23,6 +23,7 @@ const Sobre = () => {
             <p>Aluno de Computação na UEPB no Sexto período. Atualmente estagiário de QA na Orbit Tech.</p>
           </div>
         </div>
+       
       </div>
     </div>
   );
