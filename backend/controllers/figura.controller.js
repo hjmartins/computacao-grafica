@@ -40,6 +40,7 @@ class FiguraController {
 
       pontos.push({pontox: Math.round(x), pontoy: Math.round(y)})      
     }
+
     return pontos
   }
 
@@ -126,7 +127,7 @@ class FiguraController {
     let x = 0;
     let y = raio;
   
-    pontos.push([x + xOrigem, y + yOrigem]);
+    pontos.push({ pontox: x + xOrigem, pontoy: y + yOrigem });
   
     while (x <= y) {
       x = x + 1;
@@ -144,10 +145,11 @@ class FiguraController {
       ];
   
       pontosSimetricos.forEach(([pontox, pontoy]) => {
-        pontos.push([pontox + xOrigem, pontoy + yOrigem]);
+        pontos.push({ pontox: pontox + xOrigem, pontoy: pontox + yOrigem });
       });
     }
   
+    console.log(pontos)
     return pontos;
   }
 
@@ -158,7 +160,7 @@ class FiguraController {
     let y = raio;
     let p_medio;
     
-    pontos.push([x + xOrigem, y + yOrigem]);
+    pontos.push({ pontox: x + xOrigem, pontoy: y + yOrigem });
     
     if (Number.isInteger(raio)) {
       p_medio = 1 - raio;
@@ -191,12 +193,13 @@ class FiguraController {
       ];
     
       pontosSimetricos.forEach(([pontox, pontoy]) => {
-        pontos.push([pontox + xOrigem, pontoy + yOrigem]);
+        pontos.push({ pontox: pontox + xOrigem, pontoy: pontoy + yOrigem });
       });
     }
     
     pontos.push({ pontox: x - 1, pontoy: y });
     
+
     return pontos;
   }
 
@@ -209,11 +212,11 @@ class FiguraController {
     for (let angulo = 0; angulo <= 2 * Math.PI; angulo += incrementoAngulo) {
       const x = xOrigem + raio * Math.cos(angulo);
       const y = yOrigem + raio * Math.sin(angulo);
-      pontos.push([x, y]);
+      pontos.push({ pontox: Math.round(x), pontoy: Math.round(y) });
     }
     
     const ultimoPonto = pontos[pontos.length - 1];
-    pontos.push({ pontox: ultimoPonto[0], pontoy: ultimoPonto[1] });
+    pontos.push({ pontox: Math.round(ultimoPonto[0]), pontoy:  Math.round(ultimoPonto[1]) });
     
     return pontos;
   }
