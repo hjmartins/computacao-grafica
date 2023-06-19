@@ -1,6 +1,10 @@
 const express = require("express");
 
 const app = express();
+
+const port = 9090;
+const portFront = 3000;
+
 const RoutesFiguras = require('./routes/figura.routes')
 const RoutesTransformacoesFiguras = require('./routes/transformaçõesFiguras.routes')
 const RoutesFiltros = require('./routes/filtros.routes')
@@ -9,7 +13,7 @@ const RoutesTransformacoesImagens = require('./routes/transformacaoImagem.routes
 
 //ativa CORS para possibilitar usar servidor e fron-end na mesma maquina
 app.use(function (req, res, next) {
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
+  res.setHeader("Access-Control-Allow-Origin", `http://localhost:${portFront}`);
   res.setHeader(
     "Access-Control-Allow-Methods",
     "GET, POST, OPTIONS, PUT, PATCH, DELETE"
@@ -22,6 +26,9 @@ app.use(function (req, res, next) {
   next();
 });
 
+// Middleware para fazer o parse do corpo da requisição
+app.use(express.json());
+
 app.get("/", (req, res) => {
   res.send("Server is working");
 });
@@ -32,6 +39,6 @@ app.use(RoutesFiltros);
 app.use(RoutesOperadoresMorfologicos);
 app.use(RoutesTransformacoesImagens);
 
-app.listen(3000, () => {
-  console.log("Server is running on port 3000");
+app.listen(port, () => {
+  console.log(`Servidor rodando em http://localhost:${port}`);
 });

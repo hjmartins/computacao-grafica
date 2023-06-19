@@ -3,6 +3,18 @@ class FiguraController {
   getRetaDDA(x1,y1,x2,y2){    
     let pontos = []
 
+    let aux
+
+    if(x2 < x1){
+      aux = x2
+      x2 = x1
+      x1 = aux
+    }
+    if(y2 < y1){
+      aux = y2
+      y2 = y1
+      y1 = aux
+    }
     //descobre tamanho da reta
     let length = x2-x1
 
@@ -19,7 +31,7 @@ class FiguraController {
     let x = x1
     let y = y1
     
-    pontos.push({pontoX: Math.round(x), pontoY: Math.round(y)})
+    pontos.push({pontox: Math.round(x), pontoy: Math.round(y)})
 
     //enquanto x for menor que y o algoritmo incrementa a posicao do ponto e o coloca no Arraylist "pontosReta"
     while(x < x2){
@@ -80,12 +92,12 @@ class FiguraController {
               auxY1 += 1;
               d += IncNE;
 
-              pontos.push({pontox:auxX1, pontoY:auxY1})
+              pontos.push({pontox:auxX1, pontoy:auxY1})
           } else {
               auxX1 += 1;
               d += IncE;
 
-              pontos.push({pontox:auxX1, pontoY:auxY1})
+              pontos.push({pontox:auxX1, pontoy:auxY1})
           }
         }
     }else{
@@ -95,13 +107,13 @@ class FiguraController {
                 auxY1 += 1;
                 d += IncNE;
 
-                pontos.push({pontox:auxX1, pontoY:auxY1})
+                pontos.push({pontox:auxX1, pontoy:auxY1})
             }
             else{
                 auxY1+=1;
                 d+=IncE;
 
-                pontos.push({pontox:auxX1, pontoY:auxY1})
+                pontos.push({pontox:auxX1, pontoy:auxY1})
             }
         }
     }
@@ -110,17 +122,17 @@ class FiguraController {
   }
 
   //colocar parametros
-  getCirculoEquacaoExplicita(raio, xOrigem, yOrigem){
+  getCirculoEquacaoExplicita(raio, xOrigem, yOrigem) {
+    const pontos = [];
     let x = 0;
     let y = raio;
-    let pontos = [];
-    
-    pontos.push([x + xOrigem, y + yOrigem]);
-    
+  
+    pontos.push({ pontox: x + xOrigem, pontoy: y + yOrigem });
+  
     while (x <= y) {
-      x++;
-      y = Math.sqrt(raio * raio - x * x);
-      
+      x = x + 1;
+      y = Math.round(Math.sqrt(raio * raio - x * x));
+  
       const pontosSimetricos = [
         [x, y],
         [-x, y],
@@ -131,14 +143,13 @@ class FiguraController {
         [y, -x],
         [-y, -x]
       ];
-    
-      pontosSimetricos.forEach(([pontoX, pontoY]) => {
-        pontos.push([pontoX + xOrigem, pontoY + yOrigem]);
+  
+      pontosSimetricos.forEach(([pontox, pontoy]) => {
+        pontos.push({ pontox: pontox + xOrigem, pontoy: pontox + yOrigem });
       });
     }
-    
-    pontos.push({ pontox: x - 1, pontoy: y });
-
+  
+    console.log(pontos)
     return pontos;
   }
 
@@ -149,7 +160,7 @@ class FiguraController {
     let y = raio;
     let p_medio;
     
-    pontos.push([x + xOrigem, y + yOrigem]);
+    pontos.push({ pontox: x + xOrigem, pontoy: y + yOrigem });
     
     if (Number.isInteger(raio)) {
       p_medio = 1 - raio;
@@ -181,12 +192,13 @@ class FiguraController {
         [-y, -x]
       ];
     
-      pontosSimetricos.forEach(([pontoX, pontoY]) => {
-        pontos.push([pontoX + xOrigem, pontoY + yOrigem]);
+      pontosSimetricos.forEach(([pontox, pontoy]) => {
+        pontos.push({ pontox: pontox + xOrigem, pontoy: pontoy + yOrigem });
       });
     }
     
     pontos.push({ pontox: x - 1, pontoy: y });
+    
 
     return pontos;
   }
@@ -200,12 +212,13 @@ class FiguraController {
     for (let angulo = 0; angulo <= 2 * Math.PI; angulo += incrementoAngulo) {
       const x = xOrigem + raio * Math.cos(angulo);
       const y = yOrigem + raio * Math.sin(angulo);
-      pontos.push([x, y]);
+      pontos.push({ pontox: Math.round(x), pontoy: Math.round(y) });
     }
     
     const ultimoPonto = pontos[pontos.length - 1];
-    pontos.push({ pontox: ultimoPonto[0], pontoy: ultimoPonto[1] });
+    pontos.push({ pontox: Math.round(ultimoPonto[0]), pontoy:  Math.round(ultimoPonto[1]) });
     
+    return pontos;
   }
 
   getElipsePontoMedio(elipseCenter, minorRadius){
