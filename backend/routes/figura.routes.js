@@ -5,16 +5,27 @@ const router = express.Router()
 const path = require('path')
 const controller = require('../controllers/figura.controller')
 
-const RETADDA = '/figura/reta/dda';
-const RETAPONTOMEDIO = '/figura/reta/ponto-medio';
-const CIRCULOEXPLICITA = '/figura/circulo/equacao-explicita';
-const CIRCULOTRIGONOMETRIA = '/figura/circulo/trigonometria';
-const CIRCULOPONTOMEDIO = '/figura/circulo/ponto-medio';
-const ELIPSEPONTOMEDIO = '/figura/elipse/ponto-medio';
+const GENERAL_ROUTE = '/figura';
+
+const NDC = `${GENERAL_ROUTE}/ndc`;
+const RETADDA = `${GENERAL_ROUTE}/reta/dda`;
+const RETAPONTOMEDIO = `${GENERAL_ROUTE}/reta/ponto-medio`;
+const CIRCULOEXPLICITA = `${GENERAL_ROUTE}/circulo/equacao-explicita`;
+const CIRCULOTRIGONOMETRIA = `${GENERAL_ROUTE}/circulo/trigonometria`;
+const CIRCULOPONTOMEDIO = `${GENERAL_ROUTE}/circulo/ponto-medio`;
+const ELIPSEPONTOMEDIO = `${GENERAL_ROUTE}/elipse/ponto-medio`;
 
 // get -> `http:localhost:3000${RETADDA}` 
 
 //todos os retornos sao [{pontox1:x, pontoy1:y}, {pontox2:x, pontoy2:y},...]
+
+router.post(NDC, (req, res, next) => {
+  const [{   
+    yMax: yMax, y: y, yMin: yMin,
+    xMax: xMax, x: x, xMin: xMin
+  }] = req.body;
+  res.send(controller.getNDC(parseInt(yMax), parseInt(y),parseInt(yMin),parseInt(xMax),parseInt(x),parseInt(xMin)))
+})
 
 //req should be -> [{"ponto1X": "x1", "ponto1Y": "y1"}, {"ponto2X": "x2", "ponto2Y": "y2"}]
 router.post(RETADDA, (req, res, next) => {

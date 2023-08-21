@@ -1,4 +1,29 @@
 class FiguraController {
+
+  getNDC(y,x, yMin, xMin, yMax, xMax){
+    const ndH = 1920;
+    const ndV = 1080; //Dps torno algo varaivel
+    
+    let pontos = [];
+
+    let ndcX, ndcY;
+    let dcX, dcY;
+    
+    // Passo 1 w.c -> ndc
+
+    ndcX = (x - xMin) / (xMax - xMin);
+    ndcy = (y - yMin) / (yMay - yMin);
+
+    // Passo 2 NDC  -> DC
+
+    dcX = Math.round(ndcX * ( ndH - 1));
+    dcY = Math.round(ndcY * ( ndV - 1));
+
+    pontos.push({dcX,dcY});
+
+    return pontos;
+    
+  }
   
   getRetaDDA(x1,y1,x2,y2){    
     let pontos = []
