@@ -23,3 +23,6 @@ Entrar na pasta do back "cd ../CG/backend"
 Rodar o comando - yarn 
 
 Executar o back - make run
+
+### OBS: Caso esteja com o node_modules no back ao dar um pull/clone
+### Execute rm -rf node_modules

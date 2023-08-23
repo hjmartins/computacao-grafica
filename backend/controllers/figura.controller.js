@@ -1,28 +1,37 @@
 class FiguraController {
 
-  getNDC(y,x, yMin, xMin, yMax, xMax){
-    const ndH = 1920;
-    const ndV = 1080; //Dps torno algo varaivel
+  getNDC(yMax, y, yMin, xMax, x, xMin, min, max){    
+    try{
+      const ndH = 1920;
+      const ndV = 1080; //Dps torno algo varaivel
+      
+      let ponto = [];
     
-    let pontos = [];
+      let ndcX, ndcY;
+      let dcX, dcY;
 
-    let ndcX, ndcY;
-    let dcX, dcY;
-    
-    // Passo 1 w.c -> ndc
-
-    ndcX = (x - xMin) / (xMax - xMin);
-    ndcy = (y - yMin) / (yMay - yMin);
-
-    // Passo 2 NDC  -> DC
-
-    dcX = Math.round(ndcX * ( ndH - 1));
-    dcY = Math.round(ndcY * ( ndV - 1));
-
-    pontos.push({dcX,dcY});
-
-    return pontos;
-    
+      // Passo 1 w.c -> ndc
+  
+      ndcX = (x - xMin) / (xMax - xMin);
+      ndcY = (y - yMin) / (yMay - yMin);
+  
+      // Passo 2 NDC  -> DC
+  
+      // Para quando o min = 0 o calculo aplicado é resumido nisso
+      // dcX = Math.round(ndcX * ( ndH - 1));
+      // dcY = Math.round(ndcY * ( ndV - 1));
+  
+      dcX = Math.round((ndcX - min / max - min) * (ndH - max - min) + min);
+      dcY = Math.round((ndcY - min / max - min) * (ndV - max - min) + min);
+  
+      ponto.push({dcX,dcY});
+  
+      return ponto;
+      
+    } catch(error){
+      console.log(error);
+      throw new error(error);
+    }
   }
   
   getRetaDDA(x1,y1,x2,y2){    

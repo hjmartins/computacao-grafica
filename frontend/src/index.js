@@ -4,6 +4,8 @@ import ReactDOM from 'react-dom/client';
 import Home from './pages/Home';
 import Sobre from './pages/Sobre';
 
+//NDC
+import NDC from './pages/NDC/Ndc';
 // Retas
 import RDda from './pages/Retas/Dda';
 import RPontoM from './pages/Retas/PontoM';
@@ -19,6 +21,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 const router = createBrowserRouter([
   {path:'/', element:<Home/>},
   {path:'/sobre', element:<Sobre/>},
+  {path:'/ndc/ndc', element:<NDC/>},
   {path:'/retas/dda', element:<RDda/>},
   {path:'/retas/pontom', element:<RPontoM/>},
   {path:'/circulos/explicita', element:<CExplicita/>},

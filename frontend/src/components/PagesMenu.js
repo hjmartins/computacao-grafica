@@ -1,6 +1,7 @@
 const Pages = {
-    HOME: { key: 'home', title: 'Home' },
-    ALUNOS: { key: 'alunos', title: 'Alunos' },
+    HOME: { key: '', title: 'Home' },
+    ALUNOS: { key: 'sobre', title: 'Alunos' },
+    NDC: { key: 'ndc/ndc', title: 'NDC' }, 
     
     // DDA: { key: 'dda', title: 'DDA' },
     // PONTOM: { key: 'pontom', title: 'Ponto Médio' },

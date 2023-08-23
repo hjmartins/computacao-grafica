@@ -22,9 +22,16 @@ const ELIPSEPONTOMEDIO = `${GENERAL_ROUTE}/elipse/ponto-medio`;
 router.post(NDC, (req, res, next) => {
   const [{   
     yMax: yMax, y: y, yMin: yMin,
-    xMax: xMax, x: x, xMin: xMin
+    xMax: xMax, x: x, xMin: xMin,
+    min, max
   }] = req.body;
-  res.send(controller.getNDC(parseInt(yMax), parseInt(y),parseInt(yMin),parseInt(xMax),parseInt(x),parseInt(xMin)))
+  console.log(req.body)
+  try{
+    ponto = controller.getNDC(yMax, y,yMin,xMax,x,xMin, min, max);
+    res.status(200).send(ponto);
+  } catch(error){
+    res.status(400).send(error);
+  }
 })
 
 //req should be -> [{"ponto1X": "x1", "ponto1Y": "y1"}, {"ponto2X": "x2", "ponto2Y": "y2"}]

@@ -5,7 +5,8 @@ import '../styles/Home.css';
 const Home = () => {
   return (
     <div className="home-container">
-      <h1>Bem-vindo à Página Home</h1>
+      <h1>Bem-vindo ao Nosso Projeto</h1>
+      <h3>Desenvolvido por: Thiago Felipe, João Victor Marinho, Luana Vidal, Henrique</h3>
       <Botao />
     </div>
   );

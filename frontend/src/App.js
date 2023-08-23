@@ -6,6 +6,8 @@ import Menu from './components/Menu';
 import Home from './pages/Home';
 import Sobre from './pages/Sobre';
 
+// NDC
+import NDC from './pages/NDC/Ndc';
 // Retas
 import RDda from './pages/Retas/Dda';
 import RPontoM from './pages/Retas/PontoM';
@@ -22,6 +24,7 @@ const App = () => {
       <Menu />
       <Route exact path="/" component={Home} />
       <Route path="/sobre" component={Sobre} />
+      <Route path="" component={NDC} />
       <Route path="/retas/dda" component={RDda} />
       <Route path="/retas/pontom" component={RPontoM} />
       <Route path="/circulos/explicita" component={CExplicita} />
