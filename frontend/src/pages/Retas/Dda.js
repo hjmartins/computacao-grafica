@@ -9,10 +9,8 @@ function DDA() {
   const rota = 'reta/dda';
 
   const [formData, setFormData] = useState({
-    valuex1: '',
-    valuey1: '',
-    valuex2: '',
-    valuey2: ''
+    valuex1: '6', valuey1: '9',
+    valuex2: '9', valuey2: '14'
   });
   const [lines, setLines] = useState([]);
 
@@ -83,7 +81,7 @@ function DDA() {
   return (
     <div>
       <Menu />
-      <h1>Reta DDA</h1>
+      <h1 className='title'>Reta DDA</h1>
 
       <form onSubmit={handleSubmit} className="input-card">
         <h2>Ponto 1</h2>

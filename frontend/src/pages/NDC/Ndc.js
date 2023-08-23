@@ -51,27 +51,22 @@ function NDC() {
     useEffect(() => {
       const canvas = canvasRef.current;
       const context = canvas.getContext('2d');
-    
+      
       // Função para desenhar o pixel no canvas
       const drawPixel = (x, y) => {
-        context.fillRect(x, y, 1, 1);
+        context.fillRect(x, y, 3, 3);
       };
     
-      // Função para desenhar os pixels em cada coordenada fornecida
-      const drawPixels = () => {
-        // Limpar o canvas
-        context.clearRect(0, 0, canvas.width, canvas.height);
-    
-        // Desenhar os pixels
-        data.forEach(([x, y]) => {
-          drawPixel(x, y);
-        });
-      };
-    
-      // Chamar a função de desenho de pixels após a atualização do estado data
-      drawPixels();
+      // Limpar o canvas
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      
+      // Verificar se há um único pixel para desenhar
+      if (data.length === 1) {
+        const { dcX, dcY } = data[0];
+        drawPixel(dcX, dcY);
+      }
     }, [data]);
-
+    
     return (
       <div>
         <Menu />
@@ -123,9 +118,9 @@ function NDC() {
             </div>
           </form>
 
-        <div className="canvas-container">
-          <canvas ref={canvasRef} width={500} height={500} />
-        </div>
+          <div className="canvas-container">
+            <canvas ref={canvasRef} width={1920} height={1080} />
+          </div>
       </div>
     );
 }

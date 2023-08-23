@@ -14,6 +14,7 @@
 
 .menu li {
   margin: 0 10px;
+  position: relative; /* Adicione esta linha */
 }
 
 .menu li a {
@@ -69,16 +70,58 @@
 }
 
 .menu-container {
-  margin-bottom: 20px; /* Espaçamento inferior */
-  border: 1px solid #502bc0; /* Cor da borda */
-  border-radius: 10px; /* Raio da borda */
-  background-color: #191919; /* Cor de fundo */
+  margin-bottom: 20px;
+  border: 1px solid #502bc0;
+  border-radius: 10px;
+  background-color: #191919;
 }
 
 .has-dropdown .dropdown {
   display: none;
+  position: absolute;
+  top: 100%; /* Posicione o submenu abaixo do item de menu */
+  left: 0;
+  background-color: #191919;
+  border: 1px solid #502bc0;
+  border-radius: 5px;
+  padding: 10px;
+  width: 200px; /* Largura do submenu */
+  z-index: 2; /* Coloque o submenu acima do conteúdo */
 }
 
 .has-dropdown.active .dropdown {
   display: block;
+}
+
+/* Estilos para o submenu */
+.submenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #191919;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  list-style: none;
+  padding: 0;
+  margin: 10px 0;
+}
+
+.submenu li {
+  width: 100%;
+  text-align: center;
+}
+
+.submenu a {
+  display: block;
+  padding: 10px;
+  color: #fff;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.submenu a:hover {
+  background-color: #502bc0;
 }

@@ -1,17 +1,8 @@
-const Pages = {
+const PagesMenu = {
     HOME: { key: '', title: 'Home' },
     ALUNOS: { key: 'sobre', title: 'Alunos' },
-    NDC: { key: 'ndc/ndc', title: 'NDC' }, 
-    
-    // DDA: { key: 'dda', title: 'DDA' },
-    // PONTOM: { key: 'pontom', title: 'Ponto Médio' },
-    // RETAS_DDA: { key: 'retas-dda', title: 'DDA' },
-    // RETAS_PONTOM: { key: 'retas-pontom', title: 'Ponto Médio' },
-    // CIRCULOS_EXPLICITA: { key: 'circulos-explicita', title: 'Círculo Explícita' },
-    // CIRCULOS_TRIGONOMETRICA: { key: 'circulos-trigonometrica', title: 'Círculo Trigonométrico' },
-    // CIRCULOS_CPONTOM: { key: 'circulos-cpontom', title: 'Círculo Ponto Médio' },
-    // ELIPSES_EPONTOM: { key: 'elipses-epontom', title: 'Elipse Ponto Médio' },
-    // Adicione mais páginas conforme necessário
+    PROJETO1: { key: 'projeto', title: 'Projeto 1'},
+    // PROJETO2: { key: 'projeto', title: 'Projeto 2'}
 };
 
-module.exports = Pages;
+module.exports = PagesMenu;

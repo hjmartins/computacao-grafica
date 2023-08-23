@@ -13,7 +13,7 @@ class FiguraController {
       // Passo 1 w.c -> ndc
   
       ndcX = (x - xMin) / (xMax - xMin);
-      ndcY = (y - yMin) / (yMay - yMin);
+      ndcY = (y - yMin) / (yMax - yMin);
   
       // Passo 2 NDC  -> DC
   
@@ -67,7 +67,7 @@ class FiguraController {
     
     pontos.push({pontox: Math.round(x), pontoy: Math.round(y)})
 
-    //enquanto x for menor que y o algoritmo incrementa a posicao do ponto e o coloca no Arraylist "pontosReta"
+    //enquanto x for menor que x2 o algoritmo incrementa a posicao do ponto e o coloca no Arraylist "pontosReta"
     while(x < x2){
       x+=xInc
       y+=yInc

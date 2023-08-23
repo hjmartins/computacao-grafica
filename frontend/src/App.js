@@ -24,7 +24,7 @@ const App = () => {
       <Menu />
       <Route exact path="/" component={Home} />
       <Route path="/sobre" component={Sobre} />
-      <Route path="" component={NDC} />
+      <Route path="/ndc/ndc" component={NDC} />
       <Route path="/retas/dda" component={RDda} />
       <Route path="/retas/pontom" component={RPontoM} />
       <Route path="/circulos/explicita" component={CExplicita} />
