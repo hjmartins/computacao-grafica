@@ -1,9 +1,11 @@
 class FiguraController {
 
-  getNDC(yMax, y, yMin, xMax, x, xMin, min, max){    
+  getNDC(yMax, y, yMin, xMax, x, xMin, min, max, w, h){    
     try{
-      const ndH = 1920;
-      const ndV = 1080; //Dps torno algo varaivel
+      console.log(w)
+      console.log(h)
+      const ndH = w;
+      const ndV = h; //Dps torno algo varaivel
       
       let ponto = [];
     
@@ -14,17 +16,20 @@ class FiguraController {
   
       ndcX = (x - xMin) / (xMax - xMin);
       ndcY = (y - yMin) / (yMax - yMin);
+
+      console.log(`ndcX ${ndcX}`)
+      console.log(`ndcY ${ndcY}`)
   
       // Passo 2 NDC  -> DC
   
       // Para quando o min = 0 o calculo aplicado é resumido nisso
-      // dcX = Math.round(ndcX * ( ndH - 1));
-      // dcY = Math.round(ndcY * ( ndV - 1));
+      dcX = Math.round(ndcX * ( ndH - 1));
+      dcY = Math.round(ndcY * ( ndV - 1));
   
-      dcX = Math.round((ndcX - min / max - min) * (ndH - max - min) + min);
-      dcY = Math.round((ndcY - min / max - min) * (ndV - max - min) + min);
-  
-      ponto.push({dcX,dcY});
+      // dcX = Math.round(((ndcX - min) / (max - min)) * (ndH - max - min) + min);
+      // dcY = Math.round(((ndcY - min) / (max - min)) * (ndV - max - min) + min);
+      
+      ponto.push({dcX,dcY, ndcX, ndcY});
   
       return ponto;
       

@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 
-export function handleButtonClick(canvasRef, points, hasTransformed) {
+export function handleButtonClick(canvasRef, points, hasTransformed, w, h) {
   const canvas = canvasRef.current;
   const context = canvas.getContext('2d');
 
@@ -24,7 +24,7 @@ function CanvasDrawing({ points }) {
 
   return (
     <div>
-      <canvas ref={canvasRef} width={500} height={500} />
+      <canvas ref={canvasRef} width={w} height={h} />
     </div>
   );
 }

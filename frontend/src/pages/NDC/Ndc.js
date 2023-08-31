@@ -11,27 +11,30 @@ function NDC() {
     const [formData, setFormData] = useState({
         yMax: '20.3', y: '15.5', yMin: '10.3',
         xMax: '20.3', x: '15.5', xMin: '10.3',
-        min: '0', max: '1'
+        min: '0', max: '1', h: '1080', w: '1920'
     });
+    
     const [data, setData] = useState([]);
-    const canvasRef = useRef(null);
-
+    
+    const canvasRef = useRef(null); 
+    let hasTransformed;
     const fetchData = () => {
       const arrayData = [
         {   
             yMax: parseFloat(formData.yMax), y: parseFloat(formData.y), yMin: parseFloat(formData.yMin),
             xMax: parseFloat(formData.xMax), x: parseFloat(formData.x), xMin: parseFloat(formData.xMin),
-            min: parseInt(formData.min), max: parseInt(formData.max)  
+            min: parseInt(formData.min), max: parseInt(formData.max),w: parseInt(formData.w),h: parseInt(formData.h)   
         },
       ];
       axios
-        .post(`http://localhost:${porta}/figura/${rota}`, arrayData)
-        .then(response => {
-          setData(response.data);
-        })
-        .catch(error => {
-          console.error(error);
-        });
+      .post(`http://localhost:${porta}/figura/${rota}`, arrayData)
+      .then(response => {
+        console.log(response.data);
+        setData(response.data);
+      })
+      .catch(error => {
+        console.error(error);
+      });
     };
 
     const handleChange = e => {
@@ -51,6 +54,14 @@ function NDC() {
     useEffect(() => {
       const canvas = canvasRef.current;
       const context = canvas.getContext('2d');
+
+      // if(!hasTransformed){
+      //   // Definir as transformações de coordenadas
+      //   context.translate(canvas.width / 2, canvas.height / 2); // Centralizar o ponto (0, 0)
+      //   context.scale(1, -1); // Inverter o eixo y
+      //   hasTransformed=true 
+      // }
+    
       
       // Função para desenhar o pixel no canvas
       const drawPixel = (x, y) => {
@@ -113,13 +124,26 @@ function NDC() {
                 </select>
               </div>
             </div>
+            <div className="input-group">
+                <label>Largura da tela:</label>
+                <input type="number" name="w" value={formData.w} onChange={handleChange} />
+              </div>
+              <div className="input-group">
+                <label>Altura da tela:</label>
+                <input type="number" name="h" value={formData.h} onChange={handleChange} />
+              </div>
             <div className="button-container">
               <button type="submit">Ativar Pixel</button>
             </div>
           </form>
 
+          <div>
+            <p>Valores de DCX e DCY</p>
+            <p>{JSON.stringify(data)}</p>
+          </div>
+
           <div className="canvas-container">
-            <canvas ref={canvasRef} width={1920} height={1080} />
+            <canvas ref={canvasRef} width={formData.w} height={formData.h} />
           </div>
       </div>
     );
