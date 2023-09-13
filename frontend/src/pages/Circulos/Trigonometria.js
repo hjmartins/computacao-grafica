@@ -25,6 +25,7 @@ function CPontoM() {
         .post(`http://localhost:${porta}/figura/${rota}`, arrayData)
         .then(response => {
           setData(response.data);
+          console.log(response.data);
         })
         .catch(error => {
           console.error(error);
@@ -49,21 +50,19 @@ function CPontoM() {
       const canvas = canvasRef.current;
       const context = canvas.getContext('2d');
     
-    // Função para desenhar o circulo no canvas
-    const drawCircle = () => {
-      // Limpar o canvas
-      context.clearRect(0, 0, canvas.width, canvas.height);
-
-      // Desenhar o círculo
-      data.forEach(([pontox, pontoy]) => {
-        context.beginPath();
-        context.arc(pontox, pontoy, 1, 0, 2 * Math.PI);
-        context.fill();
-        context.closePath();
-      });
-    };
-      // Chamar a função de desenho após a atualização do estado data
-      drawCircle();
+      // Função para desenhar o circulo no canvas
+      const drawCircle = () => {
+        // Limpar o canvas
+        context.clearRect(0, 0, canvas.width, canvas.height);
+      
+        // Loop through the data array and draw each circle
+        data.forEach(point => {
+          context.beginPath();
+          context.arc(point.pontox, point.pontoy, 1, 0, 2 * Math.PI);
+          context.fill();
+          context.closePath();
+        });
+      };
       // Chamar a função de desenho após a atualização do estado data
       drawCircle();
     }, [data]);

@@ -9,10 +9,8 @@ function PontoM() {
   const rota = 'reta/ponto-medio';
 
   const [formData, setFormData] = useState({
-    valuex1: '',
-    valuey1: '',
-    valuex2: '',
-    valuey2: ''
+    valuex1: '6', valuey1: '9',
+    valuex2: '9', valuey2: '14'
   });
   const [lines, setLines] = useState([]);
 

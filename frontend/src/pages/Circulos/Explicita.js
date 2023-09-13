@@ -28,6 +28,7 @@ function Explicita() {
       .post(`http://localhost:${porta}/figura/${rota}`, arrayData)
       .then((response) => {
         setData(response.data);
+        console.log(response.data)
       })
       .catch((error) => {
         console.error(error);
@@ -56,13 +57,13 @@ function Explicita() {
     const drawCircle = () => {
       // Limpar o canvas
       context.clearRect(0, 0, canvas.width, canvas.height);
-
+    
       // Definir as coordenadas do centro do plano
       const centerX = canvas.width / 2;
       const centerY = canvas.height / 2;
-
+    
       // Desenhar o círculo
-      data.forEach(([pontox, pontoy]) => {
+      data.forEach(({ pontox, pontoy }) => { // Desestruture os campos corretamente
         const translatedX = centerX + pontox;
         const translatedY = centerY - pontoy; // Inverter o eixo Y
         context.beginPath();
@@ -71,7 +72,7 @@ function Explicita() {
         context.closePath();
       });
     };
-
+    
     // Chamar a função de desenho após a atualização do estado data
     drawCircle();
   }, [data]);

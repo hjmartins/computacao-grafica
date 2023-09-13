@@ -54,9 +54,9 @@ function EPontoM() {
       context.clearRect(0, 0, canvas.width, canvas.height);
 
       // Desenhar o círculo
-      data.forEach(([pontox, pontoy]) => {
+      data.forEach(point => {
         context.beginPath();
-        context.arc(pontox, pontoy, 1, 0, 2 * Math.PI);
+        context.arc(point.pontox, point.pontoy, 1, 0, 2 * Math.PI);
         context.fill();
         context.closePath();
       });

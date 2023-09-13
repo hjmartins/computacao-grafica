@@ -2,8 +2,8 @@ class FiguraController {
 
   getNDC(yMax, y, yMin, xMax, x, xMin, min, max, w, h){    
     try{
-      console.log(w)
-      console.log(h)
+      // console.log(w)
+      // console.log(h)
       const ndH = w;
       const ndV = h; //Dps torno algo varaivel
       
@@ -17,8 +17,8 @@ class FiguraController {
       ndcX = (x - xMin) / (xMax - xMin);
       ndcY = (y - yMin) / (yMax - yMin);
 
-      console.log(`ndcX ${ndcX}`)
-      console.log(`ndcY ${ndcY}`)
+      // console.log(`ndcX ${ndcX}`)
+      // console.log(`ndcY ${ndcY}`)
   
       // Passo 2 NDC  -> DC
   
@@ -188,7 +188,7 @@ class FiguraController {
       });
     }
   
-    console.log(pontos)
+    // console.log(pontos)
     return pontos;
   }
 
