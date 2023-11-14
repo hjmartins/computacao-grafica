@@ -4,6 +4,7 @@ import '../styles/Menu.css';
 
 const PagesMenu = require('./PagesMenu');
 const PagesProjeto1 = require('./PagesProjetoUm');
+const PagesProjeto2 = require('./PagesProjetoDois');
 
 const Menu = () => {
   const [currentPage, setCurrentPage] = useState(PagesMenu.HOME.key);
@@ -40,6 +41,28 @@ const Menu = () => {
             {page.key === PagesMenu.PROJETO1.key && openSubMenu === page.key && (
               <ul className="submenu">
                 {Object.values(PagesProjeto1).map((subPage) => (
+                  <li key={subPage.key}>
+                    <Link to={`/${subPage.key}`}>
+                      {subPage.title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            )}
+            {page.key === PagesMenu.PROJETO1.key && openSubMenu === page.key && (
+              <ul className="submenu">
+                {Object.values(PagesProjeto1).map((subPage) => (
+                  <li key={subPage.key}>
+                    <Link to={`/${subPage.key}`}>
+                      {subPage.title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            )}
+            {page.key === PagesMenu.PROJETO2.key && openSubMenu === page.key && (
+              <ul className="submenu">
+                {Object.values(PagesProjeto2).map((subPage) => (
                   <li key={subPage.key}>
                     <Link to={`/${subPage.key}`}>
                       {subPage.title}

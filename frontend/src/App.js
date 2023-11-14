@@ -17,7 +17,8 @@ import CTrigonometrica from './pages/Circulos/Trigonometria';
 import CPontoM from './pages/Circulos/CPontoM';
 //Elipses
 import EPontoM from './pages/Elipses/EPontoM';
-
+//Filtros
+import Filter from './pages/Processamento-de-imagem/Filtros'
 const App = () => {
   return (
     <Router>
@@ -31,6 +32,7 @@ const App = () => {
       <Route path="/circulos/trigonometrica" component={CTrigonometrica} />
       <Route path="/circulos/cpontom" component={CPontoM} />
       <Route path="/elipses/epontom" component={EPontoM} />
+      <Route path="/imagem/filtros" component={Filter} />
     </Router>
   );
 }
