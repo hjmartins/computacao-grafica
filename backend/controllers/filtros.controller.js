@@ -6,7 +6,7 @@ class FiltroController {
     getImagemFiltrada(image, nomeMascara) {
         image = JSON.parse(image);
         if (mascaras.hasOwnProperty(nomeMascara)) {
-            image.pixels = ProcessamentoImagemUtils.convolution(image, mascaras[nomeMascara], false);
+            image.pixels = ProcessamentoImagemUtils.applyConvolution(image, mascaras[nomeMascara], false);
         } else if (filtros.hasOwnProperty(nomeMascara)) {
             image.pixels = filtros[nomeMascara](image, false);
         }
