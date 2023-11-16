@@ -8,15 +8,16 @@ function Explicita() {
   const rota = 'circulo/equacao-explicita';
 
   const [formData, setFormData] = useState({
-    raio: '',
-    valuex: '',
-    valuey: '',
+    raio: '50',
+    valuex: '100',
+    valuey: '100',
+    canvasWidth: '500', // Valor padrão para largura do canvas
+    canvasHeight: '500' // Valor padrão para altura do canvas
   });
   const [data, setData] = useState([]);
   const canvasRef = useRef(null);
 
   const fetchData = () => {
-    //req should be -> [{"raio": "r", "xOrigem": "xOrigem", "yOrigem":"yOrigem"}]
     const arrayData = [
       {
         raio: parseInt(formData.raio),
@@ -44,42 +45,47 @@ function Explicita() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setData([]); // Limpar o círculo anterior
+    setData([]);
     fetchData();
+
+    // Definir o tamanho do canvas com base nos valores do formulário
+    const canvas = canvasRef.current;
+    canvas.width = parseInt(formData.canvasWidth);
+    canvas.height = parseInt(formData.canvasHeight);
   };
 
   useEffect(() => {
     const canvas = canvasRef.current;
     const context = canvas.getContext('2d');
 
-    // Função para desenhar o círculo no canvas
     const drawCircle = () => {
-      // Limpar o canvas
       context.clearRect(0, 0, canvas.width, canvas.height);
+      
+      // Obter o tamanho atual do canvas
+      const canvasWidth = canvas.clientWidth;
+      const canvasHeight = canvas.clientHeight;
 
-      // Definir as coordenadas do centro do plano
-      const centerX = canvas.width / 2;
-      const centerY = canvas.height / 2;
+      // Calcular o centro com base no tamanho atual
+      const centerX = canvasWidth / 2;
+      const centerY = canvasHeight / 2;
 
-      // Desenhar o círculo
-      data.forEach(([pontox, pontoy]) => {
+      data.forEach(({ pontox, pontoy }) => {
         const translatedX = centerX + pontox;
-        const translatedY = centerY - pontoy; // Inverter o eixo Y
+        const translatedY = centerY - pontoy;
         context.beginPath();
-        context.arc(translatedX, translatedY, 1, 0, 2 * Math.PI);
+        context.arc(translatedX, translatedY, 1, 0, 2 * Math.PI); // Altere o raio para torná-lo visível
         context.fill();
         context.closePath();
       });
     };
 
-    // Chamar a função de desenho após a atualização do estado data
     drawCircle();
-  }, [data]);
+  }, [data, formData.canvasWidth, formData.canvasHeight]);
 
   return (
     <div>
       <Menu />
-      <h1>Círculo Explicita</h1>
+      <h1>Círculo Explícito</h1>
 
       <form onSubmit={handleSubmit} className="input-card">
         <h2>Ponto X e Y</h2>
@@ -95,6 +101,17 @@ function Explicita() {
           <div className="input-group">
             <label>Valor Raio:</label>
             <input type="number" name="raio" value={formData.raio} onChange={handleChange} />
+          </div>
+        </div>
+        <h2>Tamanho do Canvas</h2>
+        <div className="input-row">
+          <div className="input-group">
+            <label>Largura:</label>
+            <input type="number" name="canvasWidth" value={formData.canvasWidth} onChange={handleChange} />
+          </div>
+          <div className="input-group">
+            <label>Altura:</label>
+            <input type="number" name="canvasHeight" value={formData.canvasHeight} onChange={handleChange} />
           </div>
         </div>
         <div className="button-container">
