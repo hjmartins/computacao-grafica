@@ -15,6 +15,8 @@ import CTrigonometrica from './pages/Circulos/Trigonometria';
 import CPontoM from './pages/Circulos/CPontoM';
 //Elipses
 import EPontoM from './pages/Elipses/EPontoM';
+//Filtros
+import Filter from './pages/Processamento-de-imagem/Filtros'
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
@@ -28,6 +30,7 @@ const router = createBrowserRouter([
   {path:'/circulos/trigonometrica', element:<CTrigonometrica/>},
   {path:'/circulos/cpontom', element:<CPontoM/>},
   {path:'/elipses/epontom', element:<EPontoM/>},
+  {path:'/imagem/filtros', element:<Filter/>},
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).

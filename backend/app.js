@@ -27,7 +27,7 @@ app.use(function (req, res, next) {
 });
 
 // Middleware para fazer o parse do corpo da requisição
-app.use(express.json());
+app.use(express.json({ limit: '10mb' }));
 
 app.get("/", (req, res) => {
   res.send("Server is working");
