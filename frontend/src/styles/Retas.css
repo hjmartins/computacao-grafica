@@ -63,6 +63,6 @@
     max-width: 100%; /* Ocupar no máximo 100% da largura disponível */
     width: auto;
     height: auto; /* Manter a proporção original do canvas */
-    max-height: 1080px; /* Altura máxima do canvas (1080 pixels) */
+    max-height: 100%; /* Altura máxima do canvas (1080 pixels) */
     margin: 0 auto;
 }

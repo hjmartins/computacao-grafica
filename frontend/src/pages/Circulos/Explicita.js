@@ -119,8 +119,8 @@ function Explicita() {
         </div>
       </form>
 
-      <div className="canvas-container">
-        <canvas ref={canvasRef} width={500} height={500} />
+      <div className="canvas-container" style={{ width: `${formData.canvasWidth}px`, height: `${formData.canvasHeight}px` }}>
+        <canvas ref={canvasRef} />
       </div>
     </div>
   );

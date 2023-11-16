@@ -126,8 +126,8 @@ function CPontoM() {
         </div>
       </form>
 
-      <div className="canvas-container">
-        <canvas ref={canvasRef} width={formData.canvasWidth} height={formData.canvasHeight} />
+      <div className="canvas-container" style={{ width: `${formData.canvasWidth}px`, height: `${formData.canvasHeight}px` }}>
+        <canvas ref={canvasRef} />
       </div>
     </div>
   );
