@@ -1,5 +1,5 @@
 class FiguraController {
-
+  
   getNDC(yMax, y, yMin, xMax, x, xMin, min, max, w, h){    
     try{
       // console.log(w)
@@ -165,13 +165,28 @@ class FiguraController {
     const pontos = [];
     let x = 0;
     let y = raio;
+    let d;
+
+    pontos.push({ pontox: x + xOrigem, pontoy: y + yOrigem});
+
+    d = Number.isInteger(raio) ? 1 - raio : 5 / 4 - raio;
   
-    pontos.push({ pontox: x + xOrigem, pontoy: y + yOrigem });
-  
-    while (x <= y) {
-      x = x + 1;
-      y = Math.round(Math.sqrt(raio * raio - x * x));
-  
+    // console.log('d '+ d)
+
+    x++;
+
+    while (x < y) {
+      if (d < 0) {
+        // console.log('inc E')
+        x += 1;
+        d = d + 2 * x + 1;
+      } else {
+        // console.log('inc NE')
+        x += 1;
+        y -= 1;
+        d += (2 * x) - (2 * y) + 1;
+      }
+      // console.log('depois x '+ x + ' y ' + y + ' d ' + d)
       const pontosSimetricos = [
         [x, y],
         [-x, y],
@@ -182,15 +197,47 @@ class FiguraController {
         [y, -x],
         [-y, -x]
       ];
-  
+
       pontosSimetricos.forEach(([pontox, pontoy]) => {
-        pontos.push({ pontox: pontox + xOrigem, pontoy: pontox + yOrigem });
+        pontos.push({ pontox: pontox + xOrigem, pontoy: pontoy + yOrigem });
+        if(pontox === 0){
+          pontos.get();
+        }
       });
     }
-  
-    // console.log(pontos)
+    pontos.push({ pontox: x, pontoy: y });
     return pontos;
   }
+  // getCirculoEquacaoExplicita(raio, xOrigem, yOrigem) {
+  //   const pontos = [];
+  //   let x = 0;
+  //   let y = raio;
+  
+  //   pontos.push({ pontox: x + xOrigem, pontoy: y + yOrigem });
+  
+  //   while (x <= y) {
+  //     x = x + 1;
+  //     y = Math.round(Math.sqrt(raio * raio - x * x));
+  
+  //     const pontosSimetricos = [
+  //       [x, y],
+  //       [-x, y],
+  //       [x, -y],
+  //       [-x, -y],
+  //       [y, x],
+  //       [-y, x],
+  //       [y, -x],
+  //       [-y, -x]
+  //     ];
+  
+  //     pontosSimetricos.forEach(([pontox, pontoy]) => {
+  //       pontos.push({ pontox: pontox + xOrigem, pontoy: pontox + yOrigem });
+  //     });
+  //   }
+  
+  //   // console.log(pontos)
+  //   return pontos;
+  // }
 
   //colocar parametros
   getCirculoPontoMedio(raio, xOrigem, yOrigem){
@@ -241,7 +288,7 @@ class FiguraController {
 
     return pontos;
   }
-
+  
   //colocar parametros
   getCirculoMetodoTrigonometria(raio, xOrigem, yOrigem){
     
@@ -260,72 +307,72 @@ class FiguraController {
     return pontos;
   }
 
-  getElipsePontoMedio(elipseCenter, minorRadius){
-      var pontos = [];
+  getElipsePontoMedio(elipseCenter, minorRadius) {
+    const pontos = [];
   
-      var dx, dy, d1, d2, x, y;
-      x = 0;
-      y = minorRadius;
+    let dx, dy, d1, d2, x, y;
+    x = 0;
+    y = minorRadius;
   
-      // Decisao inicial de regiao
-      d1 = (minorRadius * minorRadius) - (elipseCenter * elipseCenter * minorRadius) +
-          (0.25 * elipseCenter * elipseCenter);
-      dx = 2 * minorRadius * minorRadius * x;
-      dy = 2 * elipseCenter * elipseCenter * y;
+    // Decisao inicial de regiao
+    d1 = (minorRadius * minorRadius) - (elipseCenter * elipseCenter * minorRadius) +
+      (0.25 * elipseCenter * elipseCenter);
+    dx = 2 * minorRadius * minorRadius * x;
+    dy = 2 * elipseCenter * elipseCenter * y;
   
-      // Para primeira regiao
-      while (dx < dy) {
+    // Para primeira regiao
+    while (dx < dy) {
   
-          // adicionando pontos baseado na simetria de 4 lados
-          pontos.push({ pontox: x, pontoy: y });
-          pontos.push({ pontox: x, pontoy: -y });
-          pontos.push({ pontox: -x, pontoy: y });
-          pontos.push({ pontox: -x, pontoy: -y });
+      // adicionando pontos baseado na simetria de 4 lados
+      pontos.push({ pontox: x, pontoy: y });
+      pontos.push({ pontox: x, pontoy: -y });
+      pontos.push({ pontox: -x, pontoy: y });
+      pontos.push({ pontox: -x, pontoy: -y });
   
-          // Checking and updating value of
-          // decision parameter based on algorithm
-          if (d1 < 0) {
-              x++;
-              dx = dx + (2 * minorRadius * minorRadius);
-              d1 = d1 + dx + (minorRadius * minorRadius);
-          } else {
-              x++;
-              y--;
-              dx = dx + (2 * minorRadius * minorRadius);
-              dy = dy - (2 * elipseCenter * elipseCenter);
-              d1 = d1 + dx - dy + (minorRadius * minorRadius);
-          }
+      // Checking and updating value of
+      // decision parameter based on algorithm
+      if (d1 < 0) {
+        x++;
+        dx = dx + (2 * minorRadius * minorRadius);
+        d1 = d1 + dx + (minorRadius * minorRadius);
+      } else {
+        x++;
+        y--;
+        dx = dx + (2 * minorRadius * minorRadius);
+        dy = dy - (2 * elipseCenter * elipseCenter);
+        d1 = d1 + dx - dy + (minorRadius * minorRadius);
       }
+    }
   
-      // Decision parameter of region 2
-      d2 = ((minorRadius * minorRadius) * ((x + 0.5) * (x + 0.5)))
-          + ((elipseCenter * elipseCenter) * ((y - 1) * (y - 1)))
-          - (elipseCenter * elipseCenter * minorRadius * minorRadius);
+    // Decision parameter of region 2
+    d2 = ((minorRadius * minorRadius) * ((x + 0.5) * (x + 0.5)))
+      + ((elipseCenter * elipseCenter) * ((y - 1) * (y - 1)))
+      - (elipseCenter * elipseCenter * minorRadius * minorRadius);
   
-      // Plotting points of region 2
-      while (y >= 0) {
+    // Plotting points of region 2
+    while (y >= 0) {
   
-          // adicionando pontos baseado na simetria de 4 lados
-          pontos.push({ pontox: x, pontoy: y });
-          pontos.push({ pontox: -x, pontoy: y });
-          pontos.push({ pontox: x, pontoy: -y });
-          pontos.push({ pontox: -x, pontoy: -y });
+      // adicionando pontos baseado na simetria de 4 lados
+      pontos.push({ pontox: x, pontoy: y });
+      pontos.push({ pontox: -x, pontoy: y });
+      pontos.push({ pontox: x, pontoy: -y });
+      pontos.push({ pontox: -x, pontoy: -y });
   
-          // Checking and updating parameter
-          // value based on algorithm
-          if (d2 > 0) {
-              y--;
-              dy = dy - (2 * elipseCenter * elipseCenter);
-              d2 = d2 + (elipseCenter * elipseCenter) - dy;
-          } else {
-              y--;
-              x++;
-              dx = dx + (2 * minorRadius * minorRadius);
-              dy = dy - (2 * elipseCenter * elipseCenter);
-              d2 = d2 + dx - dy + (elipseCenter * elipseCenter);
-          }
+      // Checking and updating parameter
+      // value based on algorithm
+      if (d2 > 0) {
+        y--;
+        dy = dy - (2 * elipseCenter * elipseCenter);
+        d2 = d2 + (elipseCenter * elipseCenter) - dy;
+      } else {
+        y--;
+        x++;
+        dx = dx + (2 * minorRadius * minorRadius);
+        dy = dy - (2 * elipseCenter * elipseCenter);
+        d2 = d2 + dx - dy + (elipseCenter * elipseCenter);
       }
-      return pontos;
+    }
+    return pontos;
   }
 }
 
