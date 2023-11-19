@@ -17,6 +17,8 @@ import CPontoM from './pages/Circulos/CPontoM';
 import EPontoM from './pages/Elipses/EPontoM';
 //Filtros
 import Filter from './pages/Processamento-de-imagem/Filtros'
+import OperadoresMorfologicosBinario from './pages/Processamento-de-imagem/OperadoresMorfologicosBinario'
+import OperacoesImagem from './pages/Processamento-de-imagem/OperacoesImagem'
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
@@ -31,6 +33,8 @@ const router = createBrowserRouter([
   {path:'/circulos/cpontom', element:<CPontoM/>},
   {path:'/elipses/epontom', element:<EPontoM/>},
   {path:'/imagem/filtros', element:<Filter/>},
+  {path:'/imagem/operacoes-morfologicas-binarias', element:<OperadoresMorfologicosBinario/>},
+  {path:'/imagem/operacoes-imagens', element:<OperacoesImagem/>},
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).

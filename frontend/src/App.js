@@ -19,6 +19,8 @@ import CPontoM from './pages/Circulos/CPontoM';
 import EPontoM from './pages/Elipses/EPontoM';
 //Filtros
 import Filter from './pages/Processamento-de-imagem/Filtros'
+import OperadoresMorfologicosBinario from './pages/Processamento-de-imagem/OperadoresMorfologicosBinario'
+import OperacoesImagem from './pages/Processamento-de-imagem/OperacoesImagem'
 const App = () => {
   return (
     <Router>
@@ -33,6 +35,8 @@ const App = () => {
       <Route path="/circulos/cpontom" component={CPontoM} />
       <Route path="/elipses/epontom" component={EPontoM} />
       <Route path="/imagem/filtros" component={Filter} />
+      <Route path="/imagem/operacoes-morfologicas-binarias" component={OperadoresMorfologicosBinario} />
+      <Route path="/imagem/operacoes-imagens" component={OperacoesImagem} />
     </Router>
   );
 }

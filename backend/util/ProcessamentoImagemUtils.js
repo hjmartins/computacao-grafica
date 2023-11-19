@@ -47,6 +47,7 @@ class ProcessamentoImagemUtils {
         }
         return acc
     }
+    
     magnitude(gx, gy, width, height, doNormalize = true) {
         let res = [];
         for (let i = 0; i < height; i++) {
