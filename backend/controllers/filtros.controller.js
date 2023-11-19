@@ -1,5 +1,5 @@
 const ndarray = require('ndarray');
-const { mascaras, filtros, operacoes, OperadorMorfologicoBinario } = require('../util/mascaras')
+const { mascaras, filtros, operacoes, OperadorMorfologicoBinario, equalizarHistograma } = require('../util/mascaras')
 const ProcessamentoImagemUtils = require('../util/ProcessamentoImagemUtils')
 const Image = require('../util/readImage')
 class FiltroController {
@@ -32,13 +32,10 @@ class FiltroController {
         return JSON.stringify(image1)
     }
 
-    getOperadorMorfologicoCinza(image1, operacao) {
-        image1 = JSON.parse(image1);
-        if (OperadorMorfologicoBinario.hasOwnProperty(operacao)) {
-            const image = image1
-            image.pixels = OperadorMorfologicoBinario[operacao](image1);
-        }
-        return JSON.stringify(image1)
+    getHistogramaEqualizado(image) {
+        const image1 = JSON.parse(image);
+        console.log(JSON.stringify(new Image(image1.width, image1.height, image1.maxPixelValue, equalizarHistograma(image1.pixels))))
+        return new Image(image1.width, image1.height, image1.maxPixelValue, equalizarHistograma(image1.pixels));
     }
 }
 

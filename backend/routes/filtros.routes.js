@@ -5,7 +5,7 @@ const controller = require('../controllers/filtros.controller')
 const IMAGEMFILTRADA = '/filtro/imagem-filtrada';
 const OPERACOESIMAGENS = '/filtro/operacoes-imagem';
 const OPERACOESMORFOLOGICASBINARIO = '/filtro/operacoes-morfologicas-binario';
-const OPERACOESMORFOLOGICASCINZA = '/filtro/operacoes-morfologicas-cinza';
+const EQUALIZARHISTOGRAMA = '/filtro/equalizar-histograma';
 
 //req should be -> [{"image": "image.jpeg"}]
 router.post(IMAGEMFILTRADA, (req, res, next) => {
@@ -21,8 +21,8 @@ router.post(OPERACOESMORFOLOGICASBINARIO, (req, res, next) => {
     res.send(controller.getOperadorMorfologicoBinario(req.body.image, req.body.operacao, req.body.mascara, req.body.isBinary))
 })
 
-router.post(OPERACOESMORFOLOGICASCINZA, (req, res, next) => {
-    res.send(controller.getOperadorMorfologicoCinza(req.body.image, req.body.nomeMascara))
+router.post(EQUALIZARHISTOGRAMA, (req, res, next) => {
+    res.send(controller.getHistogramaEqualizado(req.body.image))
 })
 
 module.exports = router

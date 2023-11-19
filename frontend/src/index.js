@@ -19,6 +19,7 @@ import EPontoM from './pages/Elipses/EPontoM';
 import Filter from './pages/Processamento-de-imagem/Filtros'
 import OperadoresMorfologicosBinario from './pages/Processamento-de-imagem/OperadoresMorfologicosBinario'
 import OperacoesImagem from './pages/Processamento-de-imagem/OperacoesImagem'
+import EqualizarHistograma from './pages/Processamento-de-imagem/EqualizarHistograma'
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
@@ -35,6 +36,7 @@ const router = createBrowserRouter([
   {path:'/imagem/filtros', element:<Filter/>},
   {path:'/imagem/operacoes-morfologicas-binarias', element:<OperadoresMorfologicosBinario/>},
   {path:'/imagem/operacoes-imagens', element:<OperacoesImagem/>},
+  {path:'/imagem/equalizar-histograma', element:<EqualizarHistograma/>},
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).

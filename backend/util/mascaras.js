@@ -44,7 +44,89 @@ const OperadorMorfologicoBinario = {
     "bottom hat": binaryBottomHat,
 }
 
-function grayErosion(image, mascara){
+function calcularHistograma(imagem) {
+    const histograma = Array(256).fill(0);
+
+    // Calcula o histograma
+    for (let i = 0; i < imagem.length; i++) {
+        for (let j = 0; j < imagem[i].length; j++) {
+            histograma[imagem[i][j]]++;
+        }
+    }
+
+    return histograma;
+}
+
+function calcularCDF(histograma) {
+    const cdf = Array(256).fill(0);
+    let acumulado = 0;
+
+    // Calcula a CDF
+    for (let i = 0; i < histograma.length; i++) {
+        acumulado += histograma[i];
+        cdf[i] = acumulado;
+    }
+
+    // Normaliza a CDF
+    const cdfNormalizado = cdf.map(value => value / acumulado);
+
+    return cdfNormalizado;
+}
+
+function equalizarHistograma(imagem) {
+    const histograma = calcularHistograma(imagem);
+    const cdfNormalizado = calcularCDF(histograma);
+
+    // Equalização
+    const imagemEqualizada = imagem.map(row =>
+        row.map(pixel => Math.round(cdfNormalizado[pixel] * 255))
+    );
+
+    return imagemEqualizada;
+}
+
+function calcularHistograma(imagem) {
+    const histograma = Array(256).fill(0);
+
+    // Calcula o histograma
+    for (let i = 0; i < imagem.length; i++) {
+        for (let j = 0; j < imagem[i].length; j++) {
+            histograma[imagem[i][j]]++;
+        }
+    }
+
+    return histograma;
+}
+
+function calcularCDF(histograma) {
+    const cdf = Array(256).fill(0);
+    let acumulado = 0;
+
+    // Calcula a CDF
+    for (let i = 0; i < histograma.length; i++) {
+        acumulado += histograma[i];
+        cdf[i] = acumulado;
+    }
+
+    // Normaliza a CDF
+    const cdfNormalizado = cdf.map(value => value / acumulado);
+
+    return cdfNormalizado;
+}
+
+function equalizarHistograma(imagem) {
+    const histograma = calcularHistograma(imagem);
+    const cdfNormalizado = calcularCDF(histograma);
+
+    // Equalização
+    const imagemEqualizada = imagem.map(row =>
+        row.map(pixel => Math.round(cdfNormalizado[pixel] * 255))
+    );
+
+    return imagemEqualizada;
+}
+
+function grayErosion(image, mascara) {
     const result = []
 
     const base = image
@@ -62,7 +144,7 @@ function grayErosion(image, mascara){
 
                     if (row >= 0 && row < n && col >= 0 && col < m) {
                         currPixel.push(base[row][col] - mascara[k + 1][l + 1])
-                    }else{
+                    } else {
                         currPixel.push(0)
                     }
                 }
@@ -76,7 +158,7 @@ function grayErosion(image, mascara){
     return result;
 }
 
-function grayDilation(image, mascara){
+function grayDilation(image, mascara) {
     const result = []
 
     const base = image
@@ -94,7 +176,7 @@ function grayDilation(image, mascara){
 
                     if (row >= 0 && row < n && col >= 0 && col < m) {
                         currPixel.push(base[row][col] + mascara[k + 1][l + 1])
-                    }else{
+                    } else {
                         currPixel.push(0)
                     }
                 }
@@ -162,20 +244,20 @@ function binaryErosion(image, mascara) {
 
 function binaryDilation(image, mascara) {
     const result = [];
-    
+
     mascara = [
         [0, 0, 0],
         [0, 0, 0],
         [0, 0, 0]
     ];
-    
+
     const base = image
     const n = image.length;
     const m = image[0].length;
 
-    for(let i = 0; i < n; i++){
+    for (let i = 0; i < n; i++) {
         const resultLine = []
-        for(let j = 0; j < m; j++){
+        for (let j = 0; j < m; j++) {
             resultLine.push(255)
         }
         result.push(resultLine)
@@ -183,12 +265,12 @@ function binaryDilation(image, mascara) {
 
     for (let i = 0; i < n; i++) {
         for (let j = 0; j < m; j++) {
-            if(mascara[1][1] == 0 && mascara[1][1] == base[i][j]){
+            if (mascara[1][1] == 0 && mascara[1][1] == base[i][j]) {
                 for (let k = -1; k <= 1; k++) {
                     for (let l = -1; l <= 1; l++) {
                         const row = i + k;
                         const col = j + l;
-    
+
                         if (row >= 0 && row < n && col >= 0 && col < m && mascara[k + 1][l + 1] == 0) {
                             result[row][col] = mascara[k + 1][l + 1]
                         }
@@ -203,7 +285,7 @@ function binaryDilation(image, mascara) {
 
 // Função para realizar a operação de abertura em uma imagem binária
 function binaryOpening(image, structuringElement, isBinary) {
-    if(isBinary){
+    if (isBinary) {
         const resultbinaryErosion = binaryErosion(image, structuringElement);
         return binaryDilation(resultbinaryErosion, structuringElement);
     }
@@ -213,7 +295,7 @@ function binaryOpening(image, structuringElement, isBinary) {
 
 // Função para realizar a operação de fechamento em uma imagem binária
 function binaryClosing(image, structuringElement, isBinary) {
-    if(isBinary){
+    if (isBinary) {
         const resultbinaryDilation = binaryDilation(image, structuringElement);
         return binaryErosion(resultbinaryDilation, structuringElement);
     }
@@ -223,41 +305,41 @@ function binaryClosing(image, structuringElement, isBinary) {
 
 // Função para realizar a operação de binaryGradiente em uma imagem binária
 function binaryGradient(image, structuringElement, isBinary) {
-    if(isBinary){
+    if (isBinary) {
         const resultbinaryDilation = binaryDilation(image, structuringElement);
         const resultbinaryErosion = binaryErosion(image, structuringElement);
-        
+
         const resultbinaryGradient = [];
         for (let i = 0; i < image.length; i++) {
             resultbinaryGradient[i] = resultbinaryDilation[i] - resultbinaryErosion[i];
         }
-        return resultbinaryGradient;        
+        return resultbinaryGradient;
     }
     const resultGrayDilation = grayDilation(image, structuringElement);
     const resultGrayErosion = grayErosion(image, structuringElement);
-    
+
     const resultgrayGradient = [];
     for (let i = 0; i < image.length; i++) {
         resultgrayGradient[i] = resultGrayDilation[i] - resultGrayErosion[i];
     }
-    return resultgrayGradient;        
+    return resultgrayGradient;
 }
 
 // Função para realizar a operação de top hat em uma imagem binária
 function binaryTopHat(image, structuringElement, isBinary) {
-    if(isBinary){
+    if (isBinary) {
         const resultbinaryOpening = binaryOpening(image, structuringElement, true);
-    
+
         // Top Hat é a diferença entre a imagem original e a abertura
         const resultTopHat = [];
         for (let i = 0; i < image.length; i++) {
             resultTopHat[i] = image[i] - resultbinaryOpening[i];
         }
-    
+
         return resultTopHat;
     }
     const resultbinaryOpening = binaryOpening(image, structuringElement, false);
-    
+
     // Top Hat é a diferença entre a imagem original e a abertura
     const resultTopHat = [];
     for (let i = 0; i < image.length; i++) {
@@ -268,14 +350,14 @@ function binaryTopHat(image, structuringElement, isBinary) {
 }
 
 function binaryBottomHat(image, structuringElement, isBinary) {
-    if(isBinary){
+    if (isBinary) {
         const resultbinaryClosing = binaryClosing(image, structuringElement, true);
 
         const resultBottomHat = [];
         for (let i = 0; i < image.length; i++) {
             resultBottomHat[i] = resultbinaryClosing[i] - image[i];
         }
-    
+
         return resultBottomHat;
     }
     const resultbinaryClosing = binaryClosing(image, structuringElement, false);
@@ -353,7 +435,7 @@ function subtracao(image1, image2) {
             const sub = image1.pixels[i][j] - image2.pixels[i][j]
             sum > 255 ? pixelLine.push(255) : pixelLine.push(sum)
 
-            sub < 0 ? pixelLine.push( 0) : pixelLine.push( sub)
+            sub < 0 ? pixelLine.push(0) : pixelLine.push(sub)
         }
         new_image.push(pixelLine)
     }
@@ -368,11 +450,11 @@ function multiplicacao(image1, image2) {
         for (let j = 0; j < image1.height; j++) {
             const mult = image1.pixels[i][j] / image2.pixels[i][j];
             if (mult < 0) {
-                pixelLine.push( 0);
+                pixelLine.push(0);
             } else if (mult > 255) {
-                pixelLine.push( 255);
+                pixelLine.push(255);
             } else {
-                pixelLine.push( mult);
+                pixelLine.push(mult);
             }
         }
         new_image.push(pixelLine)
@@ -389,11 +471,11 @@ function divisao(image1, image2) {
         for (let j = 0; j < image1.height; j++) {
             const div = image1.pixels[i][j] / image2.pixels[i][j];
             if (div < 0) {
-                pixelLine.push( 0);
+                pixelLine.push(0);
             } else if (div > 255) {
-                pixelLine.push( 255);
+                pixelLine.push(255);
             } else {
-                pixelLine.push( div);
+                pixelLine.push(div);
             }
         }
         new_image.push(pixelLine)
@@ -402,4 +484,4 @@ function divisao(image1, image2) {
     return new Image(image1.width, image1.height, image1.maxPixelValue, new_image);
 }
 
-module.exports = { mascaras, filtros, operacoes, OperadorMorfologicoBinario };
+module.exports = { mascaras, filtros, operacoes, OperadorMorfologicoBinario, equalizarHistograma };
