@@ -18,7 +18,8 @@ import CPontoM from './pages/Circulos/CPontoM';
 // Elipses
 import EPontoM from './pages/Elipses/EPontoM';
 // Recorte de tela
-// import CohenSutherland from './pages/Recorte-de-Tela/CohenSutherland';
+import CohenSutherland from './pages/Recorte-de-Tela/CohenSutherland';
+import RecorteTela from './pages/Recorte-de-Tela/Transformacoes2D3D';
 // Filtros
 import Filter from './pages/Processamento-de-imagem/Filtros';
 // Frequencia cardiaca
@@ -37,9 +38,10 @@ const App = () => {
       <Route path="/circulos/trigonometrica" component={CTrigonometrica} />
       <Route path="/circulos/cpontom" component={CPontoM} />
       <Route path="/elipses/epontom" component={EPontoM} />
-      {/* <Route path="/recorte/cohensutherland" component={CohenSutherland} /> */}
+      <Route path="/recorte/cohensutherland" component={CohenSutherland} />
       <Route path="/imagem/filtros" component={Filter} />
       <Route path="/frequencia-caridaca" component={Frequencia} />
+      {/* <Route path="/recorte/transformacoes" component={RecorteTela} /> */}
     </Router>
   );
 }

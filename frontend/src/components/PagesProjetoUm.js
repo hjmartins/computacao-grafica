@@ -6,7 +6,8 @@ const Pages = {
     CIRCULOS_TRIGONOMETRICA: { key: 'circulos/trigonometrica', title: 'Círculo Trigonométrico' },
     CIRCULOS_CPONTOM: { key: 'circulos/cpontom', title: 'Círculo Ponto Médio' },
     ELIPSES_EPONTOM: { key: 'elipses/epontom', title: 'Elipse Ponto Médio' },
-    // COHEN_SUTHERLAND: { key: 'recorte/cohensutherland', title: 'Cohen Sutherland'},
+    COHEN_SUTHERLAND: { key: 'recorte/cohensutherland', title: 'Cohen Sutherland'},
+    TRANSFORMACOES: { key: 'recorte/transformacoes', tittle: 'Transformacoes 2D 3D'},
     FREQUENCUA: { key: 'frequencia-caridaca', title: 'Frenquencia Cardiaca'}
 };
 
