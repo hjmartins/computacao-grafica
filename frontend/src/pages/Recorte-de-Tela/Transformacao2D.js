@@ -2,6 +2,9 @@ import React, { useRef, useState, useEffect } from 'react';
 import axios from 'axios';
 
 const Transformacao2D = () => {
+  const porta = '9090';
+  const rota = 'recorte/transformacao-2d';
+
   const [transformacoes, setTransformacoes] = useState([
     { tipo_transformacao: '', params: {} }
   ]);
@@ -40,7 +43,7 @@ const Transformacao2D = () => {
 
   const aplicarTransformacoes = async () => {
     try {
-      const response = await axios.post('http://localhost:SEU_BACKEND_PORT/SEU_ENDPOINT_TRANSFORMACAO', {
+      const response = await axios.post(`http://localhost:${porta}/${rota}`, {
         transformacoes: transformacoes,
         pontosOriginais: pontosOriginais,
       });
