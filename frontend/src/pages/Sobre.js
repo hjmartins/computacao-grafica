@@ -36,7 +36,7 @@ const Sobre = () => {
           <img src={imagem4} alt="Perfil 3" />
           <div className="card-content">
             <h2>Henrique Martins</h2>
-            <p>Aluno de Computação na UEPB no Sétimo período. Atualmente QA no Pibic com Prof. Ana Isabella</p>
+            <p>Aluno de Computação na UEPB no Sexto período. Atualmente QA no Pibic com Prof. Ana Isabella</p>
           </div>
         </div>
       </div>
