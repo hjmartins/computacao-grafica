@@ -49,7 +49,13 @@ const CohenSutherland = () => {
         },
       });
 
-      setResultado(response.data);
+      if (response.data !== null){
+        setResultado(response.data);
+      }
+      else{
+        setResultado(null)
+      }
+
     } catch (error) {
       console.error('Erro ao enviar dados para o backend:', error);
     }

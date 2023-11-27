@@ -17,7 +17,7 @@ import CPontoM from './pages/Circulos/CPontoM';
 import EPontoM from './pages/Elipses/EPontoM';
 // Recorte de tela
 import CohenSutherland from './pages/Recorte-de-Tela/CohenSutherland';
-// import RecorteTela from './pages/Recorte-de-Tela/Transformacoes2D3D';
+import Transformacao2D from './pages/Recorte-de-Tela/Transformacao2D';
 // Filtros
 import Filter from './pages/Processamento-de-imagem/Filtros';
 // Frequencia cardiaca
@@ -39,7 +39,7 @@ const router = createBrowserRouter([
   {path:'/recorte/cohensutherland', element:<CohenSutherland/>},
   {path:'/imagem/filtros', element:<Filter/>},
   {path:'/frequencia-caridaca', element:<Frequencia/>},
-  // {path:'/recorte/transformacoes', element:<RecorteTela/>}
+  {path:'/recorte/transformacao2d', element:<Transformacao2D/>}
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).
