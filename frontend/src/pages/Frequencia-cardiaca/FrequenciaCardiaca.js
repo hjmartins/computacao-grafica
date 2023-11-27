@@ -1,38 +1,43 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import Menu from '../../components/Menu';
 import { Line } from 'react-chartjs-2';
 
 const Frequencia = () => {
   const [idade, setIdade] = useState(30);
+  const [ondaECG, setOndaECG] = useState([]);
+  const chartRef = useRef(null);
 
-  const gerarOndaECG = (idade) => {
+  const gerarOndaECG = useCallback(() => {
     const taxaMaxima = 220 - idade;
-    const ecg = [];
+    let ecg = ondaECG.slice(); // Cria uma cópia do array existente
 
-    for (let ciclo = 0; ciclo < 3; ciclo++) {
-      for (let tempo = 0; tempo < 0.2; tempo += 0.01) {
-        const p = Math.sin(tempo * Math.PI * 2 * 5) * 5;
-        const qrs = Math.sin(tempo * Math.PI * 2 * 10) * 10;
-        const t = Math.sin(tempo * Math.PI * 2 * 15) * 5;
-        const onda = p + qrs + t + taxaMaxima / 2;
-        ecg.push(onda + Math.random() * 3);
-      }
+    // Gera um novo pulso
+    const novoPulso = [];
+    for (let tempo = 0; tempo < 0.2; tempo += 0.01) {
+      const p = Math.sin(tempo * Math.PI * 2 * 5) * 5;
+      const qrs = Math.sin(tempo * Math.PI * 2 * 10) * 10;
+      const t = Math.sin(tempo * Math.PI * 2 * 15) * 5;
+      const onda = p + qrs + t + taxaMaxima / 2;
+      novoPulso.push(onda + Math.random() * 3);
+    }
 
-      const tempoIntervalo = 1;
-      const ondaIntervalo = Math.sin(tempoIntervalo * Math.PI * 2 * 5) * 2;
-      const amplitudeAumentada = taxaMaxima / 2 + ondaIntervalo + Math.random() * 10;
+    const tempoIntervalo = 1;
+    const ondaIntervalo = Math.sin(tempoIntervalo * Math.PI * 2 * 5) * 2;
+    const amplitudeAumentada = taxaMaxima / 2 + ondaIntervalo + Math.random() * 10;
 
-      for (let tempo = 0; tempo < tempoIntervalo; tempo += 0.01) {
-        ecg.push(amplitudeAumentada);
-      }
+    // Adiciona o novo pulso ao array
+    ecg = ecg.concat(novoPulso, Array(Math.floor(tempoIntervalo / 0.01)).fill(amplitudeAumentada));
+
+    // Limitar o número total de pontos
+    const limitePontos = 1000;
+    if (ecg.length > limitePontos) {
+      ecg = ecg.slice(ecg.length - limitePontos);
     }
 
     return ecg;
-  };
+  }, [idade, ondaECG]);
 
-  const gerarGrafico = () => {
-    const ondaECG = gerarOndaECG(idade);
-
+  const gerarGrafico = useCallback(() => {
     const data = {
       labels: Array.from({ length: ondaECG.length }, (_, i) => i + 1),
       datasets: [{
@@ -61,13 +66,29 @@ const Frequencia = () => {
         },
       },
       animation: {
-        duration: 1000,
-        easing: 'linear',
+        duration: 0,
       },
     };
 
-    return <Line data={data} options={options} />;
-  };
+    return <Line ref={chartRef} data={data} options={options} />;
+  }, [ondaECG]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setOndaECG(gerarOndaECG());
+
+      // Atualizar o gráfico
+      if (chartRef.current) {
+        const chartInstance = chartRef.current.chartInstance;
+        if (chartInstance) {
+          chartInstance.update();
+        }
+      }
+    }, 1000); // Atualizar a cada segundo
+
+    // Limpar o intervalo quando o componente for desmontado
+    return () => clearInterval(interval);
+  }, [gerarOndaECG]);
 
   return (
     <div>
@@ -80,7 +101,6 @@ const Frequencia = () => {
           value={idade}
           onChange={(e) => setIdade(parseInt(e.target.value, 10))}
         />
-        <button onClick={gerarGrafico}>Gerar ECG</button>
       </div>
 
       {gerarGrafico()}
