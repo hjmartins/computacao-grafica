@@ -11,7 +11,7 @@ function NDC() {
     const [formData, setFormData] = useState({
         yMax: '20.3', y: '15.5', yMin: '10.3',
         xMax: '20.3', x: '15.5', xMin: '10.3',
-        min: '0', max: '1', h: '1080', w: '1920'
+        min: '0', max: '1', canvasWidth: '500', canvasHeight: '500'
     });
     
     const [data, setData] = useState([]);
@@ -23,7 +23,7 @@ function NDC() {
         {   
             yMax: parseFloat(formData.yMax), y: parseFloat(formData.y), yMin: parseFloat(formData.yMin),
             xMax: parseFloat(formData.xMax), x: parseFloat(formData.x), xMin: parseFloat(formData.xMin),
-            min: parseInt(formData.min), max: parseInt(formData.max),w: parseInt(formData.w),h: parseInt(formData.h)   
+            min: parseInt(formData.min), max: parseInt(formData.max),w: parseInt(formData.canvasWidth),canvasHeig: parseInt(formData.canvasHeight)   
         },
       ];
       axios
@@ -54,14 +54,6 @@ function NDC() {
     useEffect(() => {
       const canvas = canvasRef.current;
       const context = canvas.getContext('2d');
-
-      // if(!hasTransformed){
-      //   // Definir as transformações de coordenadas
-      //   context.translate(canvas.width / 2, canvas.height / 2); // Centralizar o ponto (0, 0)
-      //   context.scale(1, -1); // Inverter o eixo y
-      //   hasTransformed=true 
-      // }
-    
       
       // Função para desenhar o pixel no canvas
       const drawPixel = (x, y) => {
@@ -126,11 +118,11 @@ function NDC() {
             </div>
             <div className="input-group">
                 <label>Largura da tela:</label>
-                <input type="number" name="w" value={formData.w} onChange={handleChange} />
+                <input type="number" name="canvasWidth" value={formData.canvasWidth} onChange={handleChange} />
               </div>
               <div className="input-group">
                 <label>Altura da tela:</label>
-                <input type="number" name="h" value={formData.h} onChange={handleChange} />
+                <input type="number" name="canvasHeight" value={formData.canvasHeight} onChange={handleChange} />
               </div>
             <div className="button-container">
               <button type="submit">Ativar Pixel</button>
@@ -142,8 +134,8 @@ function NDC() {
             <p>{JSON.stringify(data)}</p>
           </div>
 
-          <div className="canvas-container">
-            <canvas ref={canvasRef} width={formData.w} height={formData.h} />
+          <div className="canvas-container" style={{ width: `${formData.canvasWidth}px`, height: `${formData.canvasHeight}px` }}>
+            <canvas ref={canvasRef} />
           </div>
       </div>
     );
