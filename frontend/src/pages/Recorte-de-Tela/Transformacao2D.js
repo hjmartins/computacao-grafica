@@ -43,17 +43,66 @@ const Transformacao2D = () => {
   };
 
   const aplicarTransformacoes = async () => {
+    console.log('Transformações:', transformacoes);
+    console.log('Pontos Originais:', pontosOriginais);
+  
     try {
-      const response = await axios.get(`http://localhost:${porta}/${rota}`, {
-        transformacoes: transformacoes,
-        pontosOriginais: pontosOriginais,
-      });
-      setPontosTransformados(response.data);
+      const apiUrl = `http://localhost:${porta}/${rota}`;
+  
+      // Flatten the nested structures
+      const flattenedTransformacoes = flattenTransformacoes(transformacoes);
+      const flattenedPontosOriginais = flattenPontosOriginais(pontosOriginais);
+  
+      // Construct the URL with query parameters
+      const url = new URL(apiUrl);
+      Object.entries(flattenedTransformacoes).forEach(([key, value]) =>
+        url.searchParams.append(key, JSON.stringify(value))
+      );
+      Object.entries(flattenedPontosOriginais).forEach(([key, value]) =>
+        url.searchParams.append(key, value)
+      );
+  
+      const response = await fetch(url);
+  
+      if (!response.ok) {
+        throw new Error(`Erro ao enviar dados para o backend. Status: ${response.status}`);
+      }
+  
+      const result = await response.json();
+      setPontosTransformados(result);
     } catch (error) {
       console.error('Erro ao enviar dados para o backend:', error);
     }
   };
+  
+// Helper function to flatten transformacoes
+const flattenTransformacoes = (transformacoes) => {
+  const flattenedArray = {
+    transformacoes: [],
+  };
 
+  transformacoes.forEach((transformacao, index) => {
+    const flattened = {
+      tipo_transformacao: transformacao.tipo_transformacao,
+      params: transformacao.params,
+    };
+    flattenedArray.transformacoes.push(flattened);
+  });
+
+  return flattenedArray;
+};
+
+  // Helper function to flatten pontosOriginais
+  const flattenPontosOriginais = (pontosOriginais) => {
+    const flattened = {};
+    pontosOriginais.forEach((ponto, index) => {
+      Object.entries(ponto).forEach(([key, value]) => {
+        flattened[`pontosOriginais[${index}].${key}`] = value;
+      });
+    });
+    return flattened;
+  };
+  
   const renderCamposParams = (index) => {
     const { tipo_transformacao, params } = transformacoes[index];
   
@@ -75,12 +124,12 @@ const Transformacao2D = () => {
             onChange={(e) => handleParamsChange(index, 'transY', parseFloat(e.target.value))}
           />
           <label htmlFor="transZ">Translação Z:</label>
-          <input
+          {/* <input
             type="number"
             id="transZ"
             value={params.transZ !== undefined ? params.transZ : 0}
             onChange={(e) => handleParamsChange(index, 'transZ', parseFloat(e.target.value))}
-          />
+          /> */}
         </>
       );
     } else if (tipo_transformacao === 'rotacao') {
@@ -100,7 +149,7 @@ const Transformacao2D = () => {
           >
             <option value="x">X</option>
             <option value="y">Y</option>
-            <option value="z">Z</option>
+            {/* <option value="z">Z</option> */}
           </select>
         </>
       );
@@ -142,7 +191,7 @@ const Transformacao2D = () => {
           >
             <option value="x">X</option>
             <option value="y">Y</option>
-            <option value="z">Z</option>
+            {/* <option value="z">Z</option> */}
           </select>
         </>
       );
@@ -156,7 +205,7 @@ const Transformacao2D = () => {
           >
             <option value="x">X</option>
             <option value="y">Y</option>
-            <option value="z">Z</option>
+            {/* <option value="z">Z</option> */}
           </select>
         </>
       );
@@ -235,12 +284,12 @@ const Transformacao2D = () => {
             value={ponto.pontoy}
             onChange={(e) => handlePontosOriginaisChange(index, 'pontoy', e.target.value)}
           />
-          <label>Ponto Z:</label>
+          {/* <label>Ponto Z:</label>
           <input
             type="number"
             value={ponto.pontoZ}
             onChange={(e) => handlePontosOriginaisChange(index, 'pontoZ', e.target.value)}
-          />
+          /> */}
         </div>
       ))}
       <button onClick={adicionarPontoOriginal}>Adicionar Ponto Original</button>

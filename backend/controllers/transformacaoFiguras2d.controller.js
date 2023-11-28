@@ -3,18 +3,37 @@ const matriz = require('../util/matrizes')
 class Transformacao{
 
 // req should be in format -> [{"tipo_transformacao": "translacao", "params": {"param1":"param1", "param2": "param2", ...}},{"tipo_transformacao": "translacao", "params": {"param1":"param1", "param2": "param2", ...}][{"pontox": "x", "pontoY": "Y"},{"pontox": "x", "pontoY": "Y"},...]
-  transformaPontos(req){
-    let transformacoes = req[0]
-    let pontosOriginais = req[1]
+transformaPontos(req) {
+  let transformacoes = JSON.parse(req.query.transformacoes);
+  let pontosOriginais = req.query.pontosOriginais;
 
-    let m = [[1, 1, 1], [1, 1, 1], [1, 1, 1]];
-    transformacoes.map(transformacao => m = matriz.multiplicaMatriz(m, this.getTransformacao(transformacao.tipo_transformacao, transformacao.params)))
+  let m = [[1, 1, 1], [1, 1, 1], [1, 1, 1]];
 
-    let pontosTransformados = []
-    pontosOriginais.map(ponto => pontosTransformados.push(matriz.multiplicaMatriz(m,[ponto.pontox, ponto.pontoy, 1])))
-  
-    return pontosTransformados
-  }
+  // Set matriz2 before the loop
+  matriz.defineMatriz2(m);
+
+  transformacoes.forEach(transformacao => {
+    const matriz_transformacao = this.getTransformacao(transformacao.tipo_transformacao, transformacao.params);
+    matriz.defineMatriz1(m);
+    m = matriz.multiplicaMatriz();
+    matriz.defineMatriz2(matriz_transformacao);
+    m = matriz.multiplicaMatriz();
+  });
+
+  let pontosTransformados = pontosOriginais.map(ponto => {
+    matriz.defineMatriz1(m);
+    const pontoHomogeneo = matriz.multiplicaMatriz([ponto.pontox, ponto.pontoy, 1]);
+    const pontoTransformado = {
+      pontoX: pontoHomogeneo[0][0] / pontoHomogeneo[0][2],
+      pontoY: pontoHomogeneo[0][1] / pontoHomogeneo[0][2],
+    };
+    return pontoTransformado;
+  });
+
+  console.log('Transformed Points:', pontosTransformados);
+
+  return pontosTransformados;
+}
   
   getTransformacao(tipo_transformacao, params){
     if(tipo_transformacao === 'translacao'){

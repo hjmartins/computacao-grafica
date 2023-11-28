@@ -87,7 +87,6 @@ const CohenSutherland = () => {
     const viewportY = centerY - viewportHeight / 2;
   
     ctx.strokeStyle = 'blue';
-    ctx.strokeRect(viewportX, viewportY, viewportWidth, viewportHeight);
   
     if (resultado && !resultado.success) {
       // Desenhar a linha recortada
