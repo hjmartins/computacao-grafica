@@ -7,7 +7,7 @@ class Transformacao{
     let transformacoes = req[0]
     let pontosOriginais = req[1]
 
-    m = [[1, 1, 1], [1, 1, 1], [1, 1, 1]];
+    let m = [[1, 1, 1], [1, 1, 1], [1, 1, 1]];
     transformacoes.map(transformacao => m = matriz.multiplicaMatriz(m, this.getTransformacao(transformacao.tipo_transformacao, transformacao.params)))
 
     let pontosTransformados = []

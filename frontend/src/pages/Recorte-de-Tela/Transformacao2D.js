@@ -44,11 +44,10 @@ const Transformacao2D = () => {
 
   const aplicarTransformacoes = async () => {
     try {
-      const response = await axios.post(`http://localhost:${porta}/${rota}`, {
+      const response = await axios.get(`http://localhost:${porta}/${rota}`, {
         transformacoes: transformacoes,
         pontosOriginais: pontosOriginais,
       });
-
       setPontosTransformados(response.data);
     } catch (error) {
       console.error('Erro ao enviar dados para o backend:', error);
@@ -57,18 +56,6 @@ const Transformacao2D = () => {
 
   const renderCamposParams = (index) => {
     const { tipo_transformacao, params } = transformacoes[index];
-
-// Translação:
-// { transX: 10, transY: 5, transZ: 0 }
-// Rotação:
-// { angulo: 45, eixo: 'z' } // Rotação de 45 graus em torno do eixo z
-// Escala:
-// { escalaX: 2, escalaY: 2, escalaZ: 1 } // Aumenta a escala em 2 vezes nos eixos x e y
-// Cisalhamento:
-// { fatorCisalhamento1: 0.5, fatorCisalhamento2: 0, direcao: 'x' } // Cisalhamento em X com fator 0.5
-// Reflexão:
-// { eixo: 'y' } // Reflexão em torno do eixo y
-
   
     if (tipo_transformacao === 'translacao') {
       return (
