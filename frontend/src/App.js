@@ -20,6 +20,10 @@ import EPontoM from './pages/Elipses/EPontoM';
 // Recorte de tela
 import CohenSutherland from './pages/Recorte-de-Tela/CohenSutherland';
 import Transformacao2D from './pages/Recorte-de-Tela/Transformacao2D';
+import Transformacao3D from './pages/Recorte-de-Tela/Transformacao3D';
+import Cubo from './pages/Recorte-de-Tela/Cubo.js';
+import ProjecaoIsometrica from './pages/Recorte-de-Tela/ProjecaoIsometrica.js';
+import ProjecaoOrtografica from './pages/Recorte-de-Tela/ProjecaoOrtografica.js';
 // Filtros
 import Filter from './pages/Processamento-de-imagem/Filtros';
 // Frequencia cardiaca
@@ -42,6 +46,10 @@ const App = () => {
       <Route path="/imagem/filtros" component={Filter} />
       <Route path="/frequencia-caridaca" component={Frequencia} />
       <Route path="/recorte/transformacao2d" component={Transformacao2D} />
+      <Route path="/recorte/transformacao3d" component={Transformacao3D} />
+      <Route path="/recorte/cubo" component={Cubo} />
+      <Route path="/recorte/projecaoisometrica" component={ProjecaoIsometrica} />
+      <Route path="/recorte/projecaoortografica" component={ProjecaoOrtografica} />
     </Router>
   );
 }

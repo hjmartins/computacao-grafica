@@ -27,7 +27,7 @@ class Transformacao{
       return this.escala(params.escalaX,params.escalaY)
     }
     if(tipo_transformacao === 'cisalhamento'){
-      return this.escala(params.fatorCisalhamento1, params.fatorCisalhamento1, params.direcao)
+      return this.escala(params.fatorCisalhamento1, params.fatorCisalhamento2, params.direcao)
     }
     if(tipo_transformacao === 'reflexao'){
       return this.rotacao(params.eixo)

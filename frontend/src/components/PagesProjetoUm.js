@@ -8,7 +8,11 @@ const Pages = {
     ELIPSES_EPONTOM: { key: 'elipses/epontom', title: 'Elipse Ponto Médio' },
     COHEN_SUTHERLAND: { key: 'recorte/cohensutherland', title: 'Cohen Sutherland'},
     TRANSFORMACAO2D: { key: 'recorte/transformacao2d', title: 'Transformacao 2D'},
-    FREQUENCUA: { key: 'frequencia-caridaca', title: 'Frenquencia Cardiaca'}
+    TRANSFORMACAO3D: { key: 'recorte/transformacao3d', title: 'Transformacao 3D'},
+    CUBO: { key: 'recorte/cubo', title: 'Cubo'},
+    PROJECAOISOMETRICA: { key: 'recorte/projecaoisometrica', title: 'Projeção Isométrica'},
+    PROJECAOORTOGRAFICA: { key: 'recorte/projecaoortografica', title: 'Projeção Ortográfica'},
+    FREQUENCUA: { key: 'frequencia-caridaca', title: 'Frenquencia Cardiaca'},
 };
 
 module.exports = Pages;

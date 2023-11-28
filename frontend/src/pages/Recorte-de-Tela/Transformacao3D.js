@@ -2,9 +2,9 @@ import React, { useRef, useState, useEffect } from 'react';
 import axios from 'axios';
 import Menu from '../../components/Menu';
 
-const Transformacao2D = () => {
+const Transformacao3D = () => {
   const porta = '9090';
-  const rota = 'recorte/transformacao-2d';
+  const rota = 'recorte/transformacao-3d';
 
   const [transformacoes, setTransformacoes] = useState([
     { tipo_transformacao: '', params: {} }
@@ -141,12 +141,19 @@ const Transformacao2D = () => {
     else if (tipo_transformacao === 'cisalhamento') { // { fatorCisalhamento1: 0.5, fatorCisalhamento2: 0, direcao: 'x' }
       return (
         <>
-          <label htmlFor="angulo">Fator de Cisalhamento:</label>
+          <label htmlFor="angulo">Fator de Cisalhamento 1:</label>
           <input
             type="number"
             id="fatorCisalhamento1"
             value={params.fatorCisalhamento1 || ''}
-            onChange={(e) => handleParamsChange(index, 'fatorCisalhamento', parseFloat(e.target.value))}
+            onChange={(e) => handleParamsChange(index, 'fatorCisalhamento1', parseFloat(e.target.value))}
+          />
+          <label htmlFor="fatorCisalhamento2">Fator de Cisalhamento 2:</label>
+          <input
+            type="number"
+            id="fatorCisalhamento2"
+            value={params.fatorCisalhamento2 || ''}
+            onChange={(e) => handleParamsChange(index, 'fatorCisalhamento2', parseFloat(e.target.value))}
           />
           <label>Direção:</label>
           <select
@@ -213,7 +220,7 @@ const Transformacao2D = () => {
   return (
     <div>
       <Menu />
-      <h2>Transformações 2D</h2>
+      <h2>Transformações 3D</h2>
       {transformacoes.map((transformacao, index) => (
         <div key={index}>
           <label>Tipo de Transformação:</label>
@@ -275,4 +282,4 @@ const Transformacao2D = () => {
   );
 };
 
-export default Transformacao2D;
+export default Transformacao3D;
