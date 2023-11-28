@@ -28,6 +28,9 @@ import Filter from './pages/Processamento-de-imagem/Filtros';
 // Frequencia cardiaca
 import Frequencia from './pages/Frequencia-cardiaca/FrequenciaCardiaca';
 
+import OperadoresMorfologicosBinario from './pages/Processamento-de-imagem/OperadoresMorfologicosBinario'
+import OperacoesImagem from './pages/Processamento-de-imagem/OperacoesImagem'
+import EqualizarHistograma from './pages/Processamento-de-imagem/EqualizarHistograma'
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
@@ -49,6 +52,9 @@ const router = createBrowserRouter([
   {path:'/recorte/cubo', element:<Cubo/>},
   {path:'/recorte/projecaoisometrica', element:<ProjecaoIsometrica/>},
   {path:'/recorte/projecaoortografica', element:<ProjecaoOrtografica/>},
+  {path:'/imagem/operacoes-morfologicas-binarias', element:<OperadoresMorfologicosBinario/>},
+  {path:'/imagem/operacoes-imagens', element:<OperacoesImagem/>},
+  {path:'/imagem/equalizar-histograma', element:<EqualizarHistograma/>},
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).

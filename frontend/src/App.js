@@ -30,6 +30,10 @@ import Filter from './pages/Processamento-de-imagem/Filtros';
 // Frequencia cardiaca
 import Frequencia from './pages/Frequencia-cardiaca/FrequenciaCardiaca';
 
+import OperadoresMorfologicosBinario from './pages/Processamento-de-imagem/OperadoresMorfologicosBinario'
+import OperacoesImagem from './pages/Processamento-de-imagem/OperacoesImagem'
+import EqualizarHistograma from './pages/Processamento-de-imagem/EqualizarHistograma'
+
 const App = () => {
   return (
     <Router>
@@ -51,6 +55,9 @@ const App = () => {
       <Route path="/recorte/cubo" component={Cubo} />
       <Route path="/recorte/projecaoisometrica" component={ProjecaoIsometrica} />
       <Route path="/recorte/projecaoortografica" component={ProjecaoOrtografica} />
+      <Route path="/imagem/operacoes-morfologicas-binarias" component={OperadoresMorfologicosBinario} />
+      <Route path="/imagem/operacoes-imagens" component={OperacoesImagem} />
+      <Route path="/imagem/equalizar-histograma" component={EqualizarHistograma}/>
     </Router>
   );
 }
