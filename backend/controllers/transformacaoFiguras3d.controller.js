@@ -1,20 +1,31 @@
 const matriz = require('../util/matrizes')
 
+
 class Transformacao{
-
 // req should be in format -> [{"tipo_transformacao": "translacao", "params": {"param1":"param1", "param2": "param2", ...}},{"tipo_transformacao": "translacao", "params": {"param1":"param1", "param2": "param2", ...}][{"pontox": "x", "pontoY": "Y","pontoz" : "z"},{"pontox": "x", "pontoY": "Y","pontoz" : "z"},...]
-  transformaPontos(req){
-    let transformacoes = req[0]
-    let pontosOriginais = req[1]
+transformaPontos(req) {
+  try {
+    console.log('Recebido req:', req); // Adicione esta linha
+    const { transformacoes, pontosOriginais } = req.body;
 
-    m = [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]];
-    transformacoes.map(transformacao => m = matriz.multiplicaMatriz(m, this.getTransformacao(transformacao.tipo_transformacao, transformacao.params)))
+    if (!transformacoes || !Array.isArray(transformacoes)) {
+      throw new Error('O parâmetro transformacoes não é um array válido.');
+    }
+
+    let m = [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]];
+    transformacoes.map(transformacao => m = matriz.multiplicaMatriz(m, this.getTransformacao(transformacao.tipo_transformacao, transformacao.params)));
 
     let pontosTransformados = []
-    pontosOriginais.map(ponto => pontosTransformados.push(matriz.multiplicaMatriz(m,[ponto.pontox, ponto.pontoy, ponto.pontoz, 1])))
-  
-    return pontosTransformados
+    pontosOriginais.map(ponto => pontosTransformados.push(matriz.multiplicaMatriz(m,[ponto.pontox, ponto.pontoy, ponto.pontoz, 1])));
+
+    return pontosTransformados;
+  } catch (error) {
+    console.error('Erro interno na transformação 3D:', error);
+    throw error; // Re-throw o erro para que ele seja capturado pelo Axios no frontend
   }
+}
+
+
   
   getTransformacao(tipo_transformacao, params){
     if(tipo_transformacao === 'translacao'){

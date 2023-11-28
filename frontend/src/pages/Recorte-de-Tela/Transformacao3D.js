@@ -45,10 +45,10 @@ const Transformacao3D = () => {
   const aplicarTransformacoes = async () => {
     try {
       const response = await axios.post(`http://localhost:${porta}/${rota}`, {
-        transformacoes: transformacoes,
-        pontosOriginais: pontosOriginais,
+        "transformacoes": [{"tipo_transformacao": "translacao", "params": {"transX": 1, "transY": 2, "transZ": 3}}],
+         "pontosOriginais": [{"pontox": 0, "pontoy": 0, "pontoZ": 0}]
       });
-
+  
       setPontosTransformados(response.data);
     } catch (error) {
       console.error('Erro ao enviar dados para o backend:', error);
@@ -201,20 +201,30 @@ const Transformacao3D = () => {
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
-
+    const g1 = canvas.getContext('2d');
+  
     // Limpar o conteúdo anterior do canvas
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
+    g1.clearRect(0, 0, canvas.width, canvas.height);
+  
+    // Fator de escala para melhor visualização
+    const scale = 100;
+  
     // Desenhar os pontos transformados
     pontosTransformados.forEach((ponto) => {
-      ctx.beginPath();
-      ctx.arc(ponto[0], ponto[1], 5, 0, 2 * Math.PI);
-      ctx.fillStyle = 'blue';
-      ctx.fill();
-      ctx.closePath();
+      // Projetar as coordenadas 3D para 2D
+      const projectedX = ponto[0] / ponto[3] * scale + canvas.width / 2;
+      const projectedY = -ponto[1] / ponto[3] * scale + canvas.height / 2;
+  
+      g1.beginPath();
+      g1.arc(projectedX, projectedY, 5, 0, 2 * Math.PI);
+      g1.fillStyle = 'blue';
+      g1.fill();
+      g1.closePath();
     });
   }, [pontosTransformados]);
+  
+  
+  
 
 
   return (
