@@ -27,7 +27,7 @@ import ProjecaoOrtografica from './pages/Recorte-de-Tela/ProjecaoOrtografica.js'
 // Filtros
 import Filter from './pages/Processamento-de-imagem/Filtros';
 // Frequencia cardiaca
-import Frequencia from './pages/Frequencia-cardiaca/FrequenciaCardiaca';
+import Frequencia from './pages/Frequencia-cardiaca/FrequenciaCardiaca.jsx';
 
 const App = () => {
   return (
