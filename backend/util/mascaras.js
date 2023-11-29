@@ -193,12 +193,6 @@ function grayDilation(image, mascara) {
 function binaryErosion(image, mascara) {
     const result = [];
 
-    mascara = [
-        [0, 0, 0],
-        [0, 0, 0],
-        [0, 0, 0]
-    ];
-
     const base = image
     const n = image.length;
     const m = image[0].length;

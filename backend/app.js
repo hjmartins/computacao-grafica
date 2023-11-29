@@ -7,9 +7,8 @@ const portFront = 3000;
 
 const RoutesFiguras = require('./routes/figura.routes')
 const RoutesTransformacoesFiguras = require('./routes/transformaçõesFiguras.routes')
-const RoutesFiltros = require('./routes/filtros.routes')
+const RoutesFiltros = require('./routes/imagem.routes')
 const RoutesOperadoresMorfologicos = require('./routes/operadoresMorfologicos.routes')
-const RoutesTransformacoesImagens = require('./routes/transformacaoImagem.routes')
 
 //ativa CORS para possibilitar usar servidor e fron-end na mesma maquina
 app.use(function (req, res, next) {
@@ -37,7 +36,6 @@ app.use(RoutesFiguras);
 app.use(RoutesTransformacoesFiguras);
 app.use(RoutesFiltros);
 app.use(RoutesOperadoresMorfologicos);
-app.use(RoutesTransformacoesImagens);
 
 app.listen(port, () => {
   console.log(`Servidor rodando em http://localhost:${port}`);

@@ -20,7 +20,7 @@ const ImageDisplay = ({ imageData }) => {
     }
   }, [imageData]);
 
-  return <canvas ref={canvasRef} />;
+  return <canvas ref={canvasRef}  width={imageData.width} height={imageData.height}/>;
 };
 
 export default ImageDisplay;

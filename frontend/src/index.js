@@ -31,6 +31,7 @@ import Frequencia from './pages/Frequencia-cardiaca/FrequenciaCardiaca';
 import OperadoresMorfologicosBinario from './pages/Processamento-de-imagem/OperadoresMorfologicosBinario'
 import OperacoesImagem from './pages/Processamento-de-imagem/OperacoesImagem'
 import EqualizarHistograma from './pages/Processamento-de-imagem/EqualizarHistograma'
+import TransformacaoImagem from './pages/Processamento-de-imagem/transformacoesImagem.js'
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
@@ -55,6 +56,7 @@ const router = createBrowserRouter([
   {path:'/imagem/operacoes-morfologicas-binarias', element:<OperadoresMorfologicosBinario/>},
   {path:'/imagem/operacoes-imagens', element:<OperacoesImagem/>},
   {path:'/imagem/equalizar-histograma', element:<EqualizarHistograma/>},
+  {path:'/imagem/transformacao-histograma', element:<TransformacaoImagem/>},
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).

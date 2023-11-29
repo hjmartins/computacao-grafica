@@ -6,6 +6,7 @@ const IMAGEMFILTRADA = '/filtro/imagem-filtrada';
 const OPERACOESIMAGENS = '/filtro/operacoes-imagem';
 const OPERACOESMORFOLOGICASBINARIO = '/filtro/operacoes-morfologicas-binario';
 const EQUALIZARHISTOGRAMA = '/filtro/equalizar-histograma';
+const TRANSFIMAGEM = '/transformacao-de-imagem';
 
 //req should be -> [{"image": "image.jpeg"}]
 router.post(IMAGEMFILTRADA, (req, res, next) => {
@@ -24,5 +25,12 @@ router.post(OPERACOESMORFOLOGICASBINARIO, (req, res, next) => {
 router.post(EQUALIZARHISTOGRAMA, (req, res, next) => {
     res.send(controller.getHistogramaEqualizado(req.body.image))
 })
+
+//req should be -> [{"image": "image.jpeg"}]
+router.post(TRANSFIMAGEM, (req, res, next) => {
+    console.log('entrou')
+	res.send(controller.getTransfImagem(req.body.image, req.body.nomeMascara, req.body.operacao))
+})
+
 
 module.exports = router

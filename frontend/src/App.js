@@ -33,6 +33,7 @@ import Frequencia from './pages/Frequencia-cardiaca/FrequenciaCardiaca';
 import OperadoresMorfologicosBinario from './pages/Processamento-de-imagem/OperadoresMorfologicosBinario'
 import OperacoesImagem from './pages/Processamento-de-imagem/OperacoesImagem'
 import EqualizarHistograma from './pages/Processamento-de-imagem/EqualizarHistograma'
+import TransformacaoImagem from './pages/Processamento-de-imagem/transformacoesImagem.js'
 
 const App = () => {
   return (
@@ -58,6 +59,7 @@ const App = () => {
       <Route path="/imagem/operacoes-morfologicas-binarias" component={OperadoresMorfologicosBinario} />
       <Route path="/imagem/operacoes-imagens" component={OperacoesImagem} />
       <Route path="/imagem/equalizar-histograma" component={EqualizarHistograma}/>
+      <Route path="/imagem/transformacao-histograma" component={TransformacaoImagem}/>
     </Router>
   );
 }
