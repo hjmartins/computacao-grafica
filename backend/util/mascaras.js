@@ -191,17 +191,15 @@ function grayDilation(image, mascara) {
 }
 
 function binaryErosion(image, mascara) {
-    const result = [];
 
     const base = image
     const n = image.length;
     const m = image[0].length;
 
-    let count = 0;
+    const result = Array.from({ length: n }, () => Array(m).fill(255));
+
     for (let i = 0; i < n; i++) {
-        const resultLine = [];
         for (let j = 0; j < m; j++) {
-            count++;
             let coincide = true;
 
             for (let k = -1; k <= 1; k++) {
@@ -209,53 +207,55 @@ function binaryErosion(image, mascara) {
                     const row = i + k;
                     const col = j + l;
 
-                    if (row >= 0 && row < n && col >= 0 && col < m) {
-                        if (mascara[k + 1][l + 1] == 0 && mascara[k + 1][l + 1] !== base[row][col]) {
-                            coincide = false;
-                            break;
-                        }
-                    } else {
+                    if (
+                        row >= 0 &&
+                        row < n &&
+                        col >= 0 &&
+                        col < m &&
+                        mascara[k + 1][l + 1] == 0 &&
+                        mascara[k + 1][l + 1] !== base[row][col]
+                    ) {
                         coincide = false;
                         break;
                     }
                 }
+
                 if (!coincide) {
                     break;
                 }
             }
 
             if (coincide) {
-                resultLine.push(0);
-            } else {
-                resultLine.push(255);
+                for (let k = -1; k <= 1; k++) {
+                    for (let l = -1; l <= 1; l++) {
+                        const row = i + k;
+                        const col = j + l;
+
+                        if (
+                            row >= 0 &&
+                            row < n &&
+                            col >= 0 &&
+                            col < m &&
+                            mascara[k + 1][l + 1] == 0
+                        ) {
+                            result[row][col] = 0;
+                        }
+                    }
+                }
             }
         }
-        result.push(resultLine);
     }
 
     return result;
 }
 
 function binaryDilation(image, mascara) {
-    const result = [];
-
-    mascara = [
-        [0, 0, 0],
-        [0, 0, 0],
-        [0, 0, 0]
-    ];
-
+    
     const base = image
     const n = image.length;
     const m = image[0].length;
 
-    for (let i = 0; i < n; i++) {
-        const resultLine = []
-        for (let j = 0; j < m; j++) {
-            resultLine.push(255)
-        }
-        result.push(resultLine)
-    }
+    const result = Array.from({ length: n }, () => Array(m).fill(255));
 
     for (let i = 0; i < n; i++) {
         for (let j = 0; j < m; j++) {
@@ -410,29 +410,37 @@ function mediana(img, x, y) {
 }
 function soma(image1, image2) {
     const new_image = [];
-    for (let i = 0; i < image1.width; i++) {
-        let pixelLine = []
-        for (let j = 0; i < image1.height; i++) {
-            const sum = image1.pixels[i][j] + image2.pixels[i][j]
-            sum > 255 ? pixelLine.push(255) : pixelLine.push(sum)
+
+    for (let i = 0; i < image1.pixels.length; i++) {
+        let pixelLine = [];
+
+        for (let j = 0; j < image1.pixels[i].length; j++) { // Corrected the loop condition
+            if (image1.pixels[i] && image2.pixels[i]) {
+                const sum = image1.pixels[i][j] + image2.pixels[i][j];
+                sum > 255 ? pixelLine.push(255) : pixelLine.push(sum);
+            }
         }
-        new_image.push(pixelLine)
+
+        new_image.push(pixelLine);
     }
+
     return new Image(image1.width, image1.height, image1.maxPixelValue, new_image);
 }
+
 
 function subtracao(image1, image2) {
     const new_image = [];
     for (let i = 0; i < image1.width; i++) {
-        let pixelLine = []
-        for (let j = 0; i < image1.height; i++) {
-            const sub = image1.pixels[i][j] - image2.pixels[i][j]
-            sum > 255 ? pixelLine.push(255) : pixelLine.push(sum)
-
-            sub < 0 ? pixelLine.push(0) : pixelLine.push(sub)
+        let pixelLine = [];
+        for (let j = 0; j < image1.height; j++) { // Fix the loop condition here (change 'i' to 'j')
+            if (image1.pixels[i] && image2.pixels[i]) {
+                const sub = image1.pixels[i][j] - image2.pixels[i][j];
+                sub > 255 ? pixelLine.push(255) : pixelLine.push(sub < 0 ? 0 : sub);
+            }
         }
-        new_image.push(pixelLine)
+        new_image.push(pixelLine);
     }
+
     return new Image(image1.width, image1.height, image1.maxPixelValue, new_image);
 }
 
@@ -442,13 +450,15 @@ function multiplicacao(image1, image2) {
     for (let i = 0; i < image1.width; i++) {
         let pixelLine = []
         for (let j = 0; j < image1.height; j++) {
-            const mult = image1.pixels[i][j] / image2.pixels[i][j];
-            if (mult < 0) {
-                pixelLine.push(0);
-            } else if (mult > 255) {
-                pixelLine.push(255);
-            } else {
-                pixelLine.push(mult);
+            if (image1.pixels[i] && image2.pixels[i]) {
+                const mult = image1.pixels[i][j] * image2.pixels[i][j];
+                if (mult < 0) {
+                    pixelLine.push(0);
+                } else if (mult > 255) {
+                    pixelLine.push(255);
+                } else {
+                    pixelLine.push(mult);
+                }
             }
         }
         new_image.push(pixelLine)
@@ -461,21 +471,28 @@ function divisao(image1, image2) {
     const new_image = [];
 
     for (let i = 0; i < image1.width; i++) {
-        let pixelLine = []
+        let pixelLine = [];
+        
         for (let j = 0; j < image1.height; j++) {
-            const div = image1.pixels[i][j] / image2.pixels[i][j];
-            if (div < 0) {
-                pixelLine.push(0);
-            } else if (div > 255) {
-                pixelLine.push(255);
-            } else {
-                pixelLine.push(div);
+            if (image1.pixels[i] && image2.pixels[i]) {
+                const div = image1.pixels[i][j] / image2.pixels[i][j];
+                const roundedDiv = Math.round(div);
+
+                if (roundedDiv < 0) {
+                    pixelLine.push(0);
+                } else if (roundedDiv > 255) {
+                    pixelLine.push(255);
+                } else {
+                    pixelLine.push(roundedDiv);
+                }
             }
         }
-        new_image.push(pixelLine)
+        
+        new_image.push(pixelLine);
     }
 
     return new Image(image1.width, image1.height, image1.maxPixelValue, new_image);
 }
+
 
 module.exports = { mascaras, filtros, operacoes, OperadorMorfologicoBinario, equalizarHistograma };

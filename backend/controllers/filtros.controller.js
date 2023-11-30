@@ -18,8 +18,10 @@ class FiltroController {
         image1 = JSON.parse(image1);
         image2 = JSON.parse(image2);
         if (operacoes.hasOwnProperty(operacao)) {
-            const image = image1
+            const image = image1;
             image.pixels = operacoes[operacao](image1, image2);
+            console.log(JSON.stringify(image))
+            return JSON.stringify(image);
         }
         return JSON.stringify(image1)
     }

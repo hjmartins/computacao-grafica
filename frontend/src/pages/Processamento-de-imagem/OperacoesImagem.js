@@ -1,35 +1,25 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Menu from '../../components/Menu';
-import '../../styles/Retas.css'; // Importe o arquivo CSS para estilização
+import '../../styles/Retas.css'; // Import the CSS file for styling
 import axios from 'axios';
 import ImageDisplay from '../../components/ImageDisplay';
 
 const mascaras = [
-    "sem_mascara",
-    "mascara_media",
-    "mascara_passa_alta_basico_1",
-    "mascara_passa_alta_basico_2",
-    "robertsX",
-    "robertsY",
-    "sobelX",
-    "sobelY",
-    "prewittX",
-    "prewittY",
-    "mediana",
-    "robertsXY",
-    "sobelXY",
-    "prewittXY"
+    "soma",
+    "subtracao",
+    "multiplicacao",
+    "divisao",
 ];
 
 function OperacoesImagem() {
-
     const porta = '9090';
 
-    const [imageData, setImageData] = useState(null);
+    const [imageData1, setImageData1] = useState(null);
+    const [imageData2, setImageData2] = useState(null);
     const [responseImage, setResponseImage] = useState(null);
     const [selectedMascara, setSelectedMascara] = useState(mascaras[0]);
 
-    const handleFileChange = (event) => {
+    const handleFileChange = (event, setImageData) => {
         const file = event.target.files[0];
         if (file) {
             const reader = new FileReader();
@@ -61,16 +51,15 @@ function OperacoesImagem() {
 
             for (let y = 3; y < parseInt(height, 10); y++) {
                 const currLine = lines[y].split(' ');
-                // console.log(currLine)
-                if(currLine){
+                if (currLine) {
                     const currPixelLine = [];
 
                     for (let x = 0; x < parseInt(width, 10); x++) {
-                        if(currLine[x]){
+                        if (currLine[x]) {
                             currPixelLine.push(parseInt(currLine[x], 10));
                         }
                     }
-    
+
                     pixels.push(currPixelLine);
                 }
             }
@@ -82,21 +71,17 @@ function OperacoesImagem() {
                 maxPixelValue: parseInt(maxPixelValue, 10),
                 pixels,
             };
-            console.log('lelele')
-            setImageData(imageData);
+
             resolve(imageData);
         });
     };
 
-    useEffect(() => {
-    }, [imageData]);
-
-    const handleSubmit = () => {
-        if (imageData) {
-            const dataToSend = { image: JSON.stringify(imageData), nomeMascara: selectedMascara };
+    const handleSubmit = (imageData1, imageData2) => {
+        if (imageData1 && imageData2) {
+            const dataToSend = { image1: JSON.stringify(imageData1), image2: JSON.stringify(imageData2), nomeMascara: selectedMascara };
 
             // Replace the following URL with your actual API endpoint
-            const apiUrl = `http://localhost:${porta}/filtro/imagem-filtrada`;
+            const apiUrl = `http://localhost:${porta}/filtro/operacoes-imagem`;
 
             // Make the API call using axios
             axios.post(apiUrl, dataToSend)
@@ -115,13 +100,12 @@ function OperacoesImagem() {
     };
 
     useEffect(() => {
-    }, [imageData, responseImage, selectedMascara]);
-
+    }, [imageData1, imageData2, responseImage, selectedMascara]);
 
     return (
         <div>
             <Menu />
-            <h1>Filtros</h1>
+            <h1>Operacoes entre Imagens</h1>
 
             <div>
                 <label>
@@ -137,10 +121,16 @@ function OperacoesImagem() {
             </div>
 
             <div>
-                <input type="file" onChange={handleFileChange} accept=".pgm" />
-                {imageData && <ImageDisplay imageData={imageData} />}
+                <input type="file" onChange={(e) => handleFileChange(e, setImageData1)} accept=".pgm" />
+                {imageData1 && <ImageDisplay imageData={imageData1} />}
             </div>
-            <button onClick={handleSubmit}>submit</button>
+
+            <div>
+                <input type="file" onChange={(e) => handleFileChange(e, setImageData2)} accept=".pgm" />
+                {imageData2 && <ImageDisplay imageData={imageData2} />}
+            </div>
+
+            <button onClick={() => handleSubmit(imageData1, imageData2)}>Submit Images</button>
             <div>
                 {responseImage && <ImageDisplay imageData={responseImage} />}
             </div>
@@ -149,4 +139,3 @@ function OperacoesImagem() {
 }
 
 export default OperacoesImagem;
-
