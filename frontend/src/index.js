@@ -32,6 +32,7 @@ import OperadoresMorfologicosBinario from './pages/Processamento-de-imagem/Opera
 import OperacoesImagem from './pages/Processamento-de-imagem/OperacoesImagem'
 import EqualizarHistograma from './pages/Processamento-de-imagem/EqualizarHistograma'
 import TransformacaoImagem from './pages/Processamento-de-imagem/transformacoesImagem.js'
+import GatodeArnold from './pages/GatodeArnold/GatodeArnold.jsx'
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
@@ -57,6 +58,7 @@ const router = createBrowserRouter([
   {path:'/imagem/operacoes-imagens', element:<OperacoesImagem/>},
   {path:'/imagem/equalizar-histograma', element:<EqualizarHistograma/>},
   {path:'/imagem/transformacao-histograma', element:<TransformacaoImagem/>},
+  {path:'/Gato-de-Arnold', element:<GatodeArnold/>},
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).

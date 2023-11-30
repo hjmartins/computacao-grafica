@@ -35,6 +35,8 @@ import OperacoesImagem from './pages/Processamento-de-imagem/OperacoesImagem'
 import EqualizarHistograma from './pages/Processamento-de-imagem/EqualizarHistograma'
 import TransformacaoImagem from './pages/Processamento-de-imagem/transformacoesImagem.js'
 
+import GatodeArnold from './pages/GatodeArnold/GatodeArnold.jsx'
+
 const App = () => {
   return (
     <Router>
@@ -60,6 +62,7 @@ const App = () => {
       <Route path="/imagem/operacoes-imagens" component={OperacoesImagem} />
       <Route path="/imagem/equalizar-histograma" component={EqualizarHistograma}/>
       <Route path="/imagem/transformacao-histograma" component={TransformacaoImagem}/>
+      <Route path="/GatodeArnold" component={GatodeArnold}/>
     </Router>
   );
 }
