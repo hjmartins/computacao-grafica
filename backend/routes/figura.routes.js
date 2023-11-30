@@ -26,8 +26,6 @@ router.post(NDC, (req, res, next) => {
     min: min, max: max, w: w, h: h
   }] = req.body;
   try{
-    console.log(w)
-      console.log(h)
     ponto = controller.getNDC(yMax, y, yMin, xMax, x, xMin, min, max, w, h);
     res.status(200).send(ponto);
   } catch(error){

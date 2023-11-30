@@ -21,7 +21,6 @@ function negativo(image, param) {
 // Função para aplicar a transformação gamma em uma imagem
 function gama(image, param) {
     const newPixels = []
-    console.log(param)
     image.pixels.forEach(pixelLine => {
         const newPixelLine = [];
         pixelLine.forEach(pixel => newPixelLine.push(Math.pow(pixel / 255, param.gamma) * 255))

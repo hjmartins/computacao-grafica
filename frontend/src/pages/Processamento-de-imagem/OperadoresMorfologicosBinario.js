@@ -72,7 +72,6 @@ function OperadoresMorfologicosBinario() {
 
             for (let y = 3; y < parseInt(height, 10); y++) {
                 const currLine = lines[y].split(' ');
-                // console.log(currLine)
                 if (currLine) {
                     const currPixelLine = [];
 
@@ -93,7 +92,6 @@ function OperadoresMorfologicosBinario() {
                 maxPixelValue: parseInt(maxPixelValue, 10),
                 pixels,
             };
-            console.log('lelele')
             setImageData(imageData);
             resolve(imageData);
         });

@@ -28,7 +28,6 @@ router.post(EQUALIZARHISTOGRAMA, (req, res, next) => {
 
 //req should be -> [{"image": "image.jpeg"}]
 router.post(TRANSFIMAGEM, (req, res, next) => {
-    console.log('entrou')
 	res.send(controller.getTransfImagem(req.body.image, req.body.nomeMascara, req.body.operacao))
 })
 

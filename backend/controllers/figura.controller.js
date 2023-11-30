@@ -2,8 +2,6 @@ class FiguraController {
   
   getNDC(yMax, y, yMin, xMax, x, xMin, min, max, w, h){    
     try{
-      // console.log(w)
-      // console.log(h)
       const ndH = w;
       const ndV = h; //Dps torno algo varaivel
       
@@ -17,9 +15,6 @@ class FiguraController {
       ndcX = (x - xMin) / (xMax - xMin);
       ndcY = (y - yMin) / (yMax - yMin);
 
-      // console.log(`ndcX ${ndcX}`)
-      // console.log(`ndcY ${ndcY}`)
-  
       // Passo 2 NDC  -> DC
   
       // Para quando o min = 0 o calculo aplicado é resumido nisso
@@ -171,22 +166,17 @@ class FiguraController {
 
     d = Number.isInteger(raio) ? 1 - raio : 5 / 4 - raio;
   
-    // console.log('d '+ d)
-
     x++;
 
     while (x < y) {
       if (d < 0) {
-        // console.log('inc E')
         x += 1;
         d = d + 2 * x + 1;
       } else {
-        // console.log('inc NE')
         x += 1;
         y -= 1;
         d += (2 * x) - (2 * y) + 1;
       }
-      // console.log('depois x '+ x + ' y ' + y + ' d ' + d)
       const pontosSimetricos = [
         [x, y],
         [-x, y],
@@ -235,7 +225,6 @@ class FiguraController {
   //     });
   //   }
   
-  //   // console.log(pontos)
   //   return pontos;
   // }
 

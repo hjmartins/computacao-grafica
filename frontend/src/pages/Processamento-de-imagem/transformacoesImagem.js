@@ -81,8 +81,6 @@ function TransformacaoImagem() {
     }, [imageData]);
 
     const handleSubmit = () => {
-        console.log(selectedMascara)
-        console.log(formValues)
         if (imageData) {
             const dataToSend = { image: JSON.stringify(imageData), nomeMascara: selectedMascara, operacao: formValues };
 

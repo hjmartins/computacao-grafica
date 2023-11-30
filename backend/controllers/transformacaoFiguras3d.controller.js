@@ -5,7 +5,6 @@ class Transformacao{
 // req should be in format -> [{"tipo_transformacao": "translacao", "params": {"param1":"param1", "param2": "param2", ...}},{"tipo_transformacao": "translacao", "params": {"param1":"param1", "param2": "param2", ...}][{"pontox": "x", "pontoY": "Y","pontoz" : "z"},{"pontox": "x", "pontoY": "Y","pontoz" : "z"},...]
 transformaPontos(req) {
   try {
-    console.log('Recebido req:', req); // Adicione esta linha
     const { transformacoes, pontosOriginais } = req.body;
 
     if (!transformacoes || !Array.isArray(transformacoes)) {

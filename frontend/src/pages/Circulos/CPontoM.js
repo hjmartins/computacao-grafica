@@ -29,7 +29,6 @@ function CPontoM() {
       .post(`http://localhost:${porta}/figura/${rota}`, arrayData)
       .then((response) => {
         setData(response.data);
-        console.log(response.data);
       })
       .catch((error) => {
         console.error(error);

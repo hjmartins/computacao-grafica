@@ -20,7 +20,6 @@ class FiltroController {
         if (operacoes.hasOwnProperty(operacao)) {
             const image = image1;
             image.pixels = operacoes[operacao](image1, image2);
-            console.log(JSON.stringify(image))
             return JSON.stringify(image);
         }
         return JSON.stringify(image1)
@@ -46,7 +45,6 @@ class FiltroController {
             if (operacoesImagem.hasOwnProperty(nomeMascara.mascara)) {
                 image1.pixels = operacoesImagem[nomeMascara.mascara](image1, operacao);
             }
-        console.log(image1.pixels)
         return new Image(image1.width, image1.height, image1.maxPixelValue, image1.pixels);
     }catch(err){
             console.log(err)

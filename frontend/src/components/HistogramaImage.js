@@ -19,8 +19,6 @@ const HistogramChart = ({ pixelValues }) => {
       });
     });
 
-    console.log(histogram)
-
     // Create a new chart
     if (chartRef && chartRef.current) {
       const ctx = chartRef.current.getContext('2d');

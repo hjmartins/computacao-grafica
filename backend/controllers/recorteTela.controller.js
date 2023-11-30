@@ -83,7 +83,6 @@ class RecorteTela {
 
         if (accept) {
             // Retornar os novos valores de x0, y0, x1 e y1
-            // console.log(Math.round(x0), Math.round(y0),Math.round(x1), Math.round(y1) )
             return { x0: Math.round(x0), y0: Math.round(y0), x1: Math.round(x1), y1: Math.round(y1) };
         } else {
             // Se a linha for rejeitada, pode retornar null ou uma indicação de erro
